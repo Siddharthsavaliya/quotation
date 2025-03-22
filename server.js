@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const User = require("./model/user.model");
 const userRoutes = require("./route/user.route");
+const customerRoutes = require("./route/customer.route");
 const response = require("./helper/response");
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/customers", customerRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

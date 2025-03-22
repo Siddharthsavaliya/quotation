@@ -259,6 +259,190 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"phone\": \"1234567890\",\n    \"companyName\": \"ABC Corp\",\n    \"gst\": \"27AABCT1234A1Z5\",\n    \"pan\": \"AABCT1234A\",\n    \"address\": \"123 Main St\",\n    \"city\": \"Mumbai\",\n    \"state\": \"Maharashtra\",\n    \"pincode\": \"400001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/customers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						},
+						"description": "Create a new customer"
+					}
+				},
+				{
+					"name": "Get All Customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/customers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						},
+						"description": "Get all customers"
+					}
+				},
+				{
+					"name": "Get Customer by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/customers/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "customer_id_here"
+								}
+							]
+						},
+						"description": "Get customer by ID"
+					}
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"John Doe Updated\",\n    \"email\": \"john.updated@example.com\",\n    \"phone\": \"9876543210\",\n    \"companyName\": \"ABC Corp Updated\",\n    \"gst\": \"27AABCT1234A1Z6\",\n    \"pan\": \"AABCT1234B\",\n    \"address\": \"456 Main St\",\n    \"city\": \"Delhi\",\n    \"state\": \"Delhi\",\n    \"pincode\": \"110001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/customers/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "customer_id_here"
+								}
+							]
+						},
+						"description": "Update customer by ID"
+					}
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/customers/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "customer_id_here"
+								}
+							]
+						},
+						"description": "Delete customer by ID"
+					}
+				}
+			]
 		}
 	],
 	"event": [
