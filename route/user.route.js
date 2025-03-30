@@ -18,13 +18,13 @@ router.use(protect);
 
 // User routes
 router.get("/profile", getProfile);
-router.patch("/profile", updateUser);
+router.post("/profile", updateUser);
 
 // Admin only routes
 router.use(restrictTo("admin"));
 router.post("/", createUser);
 router.get("/", getAllUsers);
-router.patch("/:id", updateUser);
+router.post("/:id", updateUser);
 router.delete("/:id", deleteUser);
 
 module.exports = router;
