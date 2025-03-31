@@ -1,0 +1,181 @@
+{
+  "info": {
+    "name": "Machine Form APIs",
+    "description": "Collection for Machine Form Management APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Form",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machine-forms",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machine-forms"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"machine\": \"{{machine_id}}\",\n    \"customer\": \"{{customer_id}}\",\n    \"fieldValues\": [\n        {\n            \"fieldId\": \"field1\",\n            \"value\": \"Sample Value\",\n            \"section\": 1\n        }\n    ],\n    \"customFieldValues\": [\n        {\n            \"fieldId\": \"custom1\",\n            \"value\": \"Custom Value\",\n            \"section\": 1\n        }\n    ]\n}"
+        },
+        "description": "Create a new machine form submission"
+      }
+    },
+    {
+      "name": "Get All Forms",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machine-forms",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machine-forms"]
+        },
+        "description": "Get all machine form submissions"
+      }
+    },
+    {
+      "name": "Get Form by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machine-forms/{{form_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machine-forms", "{{form_id}}"]
+        },
+        "description": "Get a specific machine form submission by ID"
+      }
+    },
+    {
+      "name": "Update Form",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machine-forms/{{form_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machine-forms", "{{form_id}}"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fieldValues\": [\n        {\n            \"fieldId\": \"field1\",\n            \"value\": \"Updated Value\",\n            \"section\": 1\n        }\n    ],\n    \"customFieldValues\": [\n        {\n            \"fieldId\": \"custom1\",\n            \"value\": \"Updated Custom Value\",\n            \"section\": 1\n        }\n    ]\n}"
+        },
+        "description": "Update a machine form submission (draft only)"
+      }
+    },
+    {
+      "name": "Submit Form",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machine-forms/{{form_id}}/submit",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machine-forms", "{{form_id}}", "submit"]
+        },
+        "description": "Submit a machine form (changes status from draft to submitted)"
+      }
+    },
+    {
+      "name": "Update Form Status",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machine-forms/{{form_id}}/status",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machine-forms", "{{form_id}}", "status"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"status\": \"approved\"\n}"
+        },
+        "description": "Update form status (approve/reject)"
+      }
+    },
+    {
+      "name": "Delete Form",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machine-forms/{{form_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machine-forms", "{{form_id}}"]
+        },
+        "description": "Delete a machine form submission (draft only)"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here"
+    },
+    {
+      "key": "machine_id",
+      "value": "machine_id_here"
+    },
+    {
+      "key": "customer_id",
+      "value": "customer_id_here"
+    },
+    {
+      "key": "form_id",
+      "value": "form_id_here"
+    }
+  ]
+} 

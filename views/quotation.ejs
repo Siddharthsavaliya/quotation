@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quotation - <%= quotation.quotationNumber %>
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+        }
+
+        .company-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .quotation-details {
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .field {
+            margin: 5px 0;
+        }
+
+        .footer {
+            margin-top: 50px;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+        }
+
+        .terms {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>QUOTATION</h1>
+        <div class="company-info">
+            <h2>Your Company Name</h2>
+            <p>Your Company Address</p>
+        </div>
+    </div>
+
+    <!-- Quotation Details -->
+    <div class="quotation-details">
+        <p><strong>Quotation Number:</strong>
+            <%= quotation.quotationNumber %>
+        </p>
+        <p><strong>Date:</strong>
+            <%= quotation.createdAt.toLocaleDateString() %>
+        </p>
+    </div>
+
+    <!-- Customer Details -->
+    <div class="section">
+        <div class="section-title">Customer Details</div>
+        <div class="field"><strong>Name:</strong>
+            <%= quotation.customer.fullName %>
+        </div>
+        <div class="field"><strong>Company:</strong>
+            <%= quotation.customer.companyName %>
+        </div>
+        <div class="field"><strong>Address:</strong>
+            <%= quotation.customer.address %>
+        </div>
+        <div class="field"><strong>GST:</strong>
+            <%= quotation.customer.gst %>
+        </div>
+    </div>
+
+    <!-- Machine Details -->
+    <div class="section">
+        <div class="section-title">Machine Details</div>
+        <div class="field"><strong>Machine:</strong>
+            <%= quotation.machine %>
+        </div>
+    </div>
+
+    <!-- Sections -->
+    <% const sections=[ { title: 'BARREL' , data: quotation.barrel }, { title: 'SCREW' , data: quotation.screw }, {
+        title: 'DRIVE' , data: quotation.drive }, { title: 'DIE' , data: quotation.die }, { title: 'COOLING RING' ,
+        data: quotation.coolingRing }, { title: 'TAKE OFF' , data: quotation.takeOff }, { title: 'WINDER' , data:
+        quotation.winder }, { title: 'CONTROL PANEL' , data: quotation.controlPanel } ]; %>
+
+        <% sections.forEach(section=> { %>
+            <div class="section">
+                <div class="section-title">
+                    <%= section.title %>
+                </div>
+                <% Object.entries(section.data).forEach(([key, value])=> { %>
+                    <% if (key !=='additionalFields' ) { %>
+                        <div class="field"><strong>
+                                <%= key %>:
+                            </strong>
+                            <%= value %>
+                        </div>
+                        <% } %>
+                            <% }); %>
+                                <% if (section.data.additionalFields && section.data.additionalFields.length> 0) { %>
+                                    <% section.data.additionalFields.forEach(field=> { %>
+                                        <div class="field"><strong>
+                                                <%= field.title %>:
+                                            </strong>
+                                            <%= field.description %>
+                                        </div>
+                                        <% }); %>
+                                            <% } %>
+            </div>
+            <% }); %>
+
+                <!-- Price Details -->
+                <div class="section">
+                    <div class="section-title">Price Details</div>
+                    <% Object.entries(quotation.price).forEach(([key, value])=> { %>
+                        <% if (key !=='additionalFields' ) { %>
+                            <div class="field"><strong>
+                                    <%= key %>:
+                                </strong>
+                                <%= value %>
+                            </div>
+                            <% } %>
+                                <% }); %>
+                                    <% if (quotation.price.additionalFields && quotation.price.additionalFields.length>
+                                        0) { %>
+                                        <% quotation.price.additionalFields.forEach(field=> { %>
+                                            <div class="field"><strong>
+                                                    <%= field.title %>:
+                                                </strong>
+                                                <%= field.description %>
+                                            </div>
+                                            <% }); %>
+                                                <% } %>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <div class="terms">
+                        <h3>Terms and Conditions:</h3>
+                        <ol>
+                            <li>This quotation is valid for 30 days from the date of issue.</li>
+                            <li>Payment terms: 50% advance, 50% before delivery.</li>
+                            <li>Delivery time: 4-6 weeks from order confirmation.</li>
+                        </ol>
+                    </div>
+                    <div class="signature">
+                        <p>For Your Company Name</p>
+                        <p>Authorized Signatory</p>
+                    </div>
+                </div>
+</body>
+
+</html>

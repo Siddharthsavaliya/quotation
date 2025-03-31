@@ -5,6 +5,9 @@ const cors = require("cors");
 const User = require("./model/user.model");
 const userRoutes = require("./route/user.route");
 const customerRoutes = require("./route/customer.route");
+const quotationRoutes = require("./route/quotation.route");
+const machineRoutes = require("./route/machine.route");
+const machineFormRoutes = require("./route/machineForm.route");
 const response = require("./helper/response");
 
 const app = express();
@@ -17,6 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/customers", customerRoutes);
+app.use("/api/quotations", quotationRoutes);
+app.use("/api/machines", machineRoutes);
+app.use("/api/machine-forms", machineFormRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

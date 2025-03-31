@@ -1,0 +1,219 @@
+{
+  "info": {
+    "name": "Machine APIs",
+    "description": "Collection for Machine Management APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Field Types",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machines/field-types",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines", "field-types"]
+        },
+        "description": "Get all available field types and value types"
+      }
+    },
+    {
+      "name": "Create Machine",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Extruder Machine\",\n    \"description\": \"High-performance extruder\",\n    \"fields\": [\n        {\n            \"title\": \"Barrel Size\",\n            \"type\": \"dropdown\",\n            \"valueType\": \"int\",\n            \"section\": 1,\n            \"options\": [\n                { \"label\": \"25mm\", \"value\": 25 },\n                { \"label\": \"50mm\", \"value\": 50 }\n            ],\n            \"isRequired\": true\n        },\n        {\n            \"title\": \"Temperature\",\n            \"type\": \"number\",\n            \"valueType\": \"float\",\n            \"isRequired\": true\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/machines",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines"]
+        },
+        "description": "Create a new machine with dynamic fields"
+      }
+    },
+    {
+      "name": "Get All Machines",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machines",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines"]
+        },
+        "description": "Get all machines with their fields"
+      }
+    },
+    {
+      "name": "Get Machine by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machines/{{machine_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines", "{{machine_id}}"]
+        },
+        "description": "Get a single machine by its ID"
+      }
+    },
+    {
+      "name": "Update Machine",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Updated Extruder Machine\",\n    \"description\": \"Updated description\",\n    \"fields\": [\n        {\n            \"title\": \"Barrel Size\",\n            \"type\": \"dropdown\",\n            \"valueType\": \"int\",\n            \"section\": 1,\n            \"options\": [\n                { \"label\": \"25mm\", \"value\": 25 },\n                { \"label\": \"50mm\", \"value\": 50 },\n                { \"label\": \"75mm\", \"value\": 75 }\n            ],\n            \"isRequired\": true\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/machines/{{machine_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines", "{{machine_id}}"]
+        },
+        "description": "Update an existing machine"
+      }
+    },
+    {
+      "name": "Delete Machine",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/machines/{{machine_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines", "{{machine_id}}"]
+        },
+        "description": "Delete a machine by its ID"
+      }
+    },
+    {
+      "name": "Add Custom Field",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Special Notes\",\n    \"value\": \"Custom value here\",\n    \"order\": 1,\n    \"section\": 1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/machines/{{machine_id}}/custom-fields",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines", "{{machine_id}}", "custom-fields"]
+        },
+        "description": "Add a custom field to an existing machine"
+      }
+    },
+    {
+      "name": "Update Custom Field Value",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"value\": \"Updated custom value\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/machines/{{machine_id}}/custom-fields/{{field_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "machines", "{{machine_id}}", "custom-fields", "{{field_id}}"]
+        },
+        "description": "Update the value of a custom field"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    },
+    {
+      "key": "machine_id",
+      "value": "machine_id_here",
+      "type": "string"
+    },
+    {
+      "key": "field_id",
+      "value": "field_id_here",
+      "type": "string"
+    }
+  ]
+} 
