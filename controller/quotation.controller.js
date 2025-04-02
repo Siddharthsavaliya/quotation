@@ -5,6 +5,8 @@ const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
+const puppeteer = require("puppeteer");
+const MachineForm = require("../model/machineForm.model");
 
 // Create new quotation
 exports.createQuotation = async (req, res) => {
@@ -215,5 +217,80 @@ exports.generatePDF = async (req, res) => {
     doc.end();
   } catch (error) {
     res.status(500).json(response(false, error.message));
+  }
+};
+
+exports.generateQuotationPDF = async (req, res) => {
+  try {
+    const { formId } = req.params;
+
+    // Find the machine form
+    const form = await MachineForm.findById(formId)
+      .populate("machine")
+      .populate("customer")
+      .populate("submittedBy");
+
+    if (!form) {
+      return res.status(404).json({
+        status: false,
+        message: "Form not found",
+      });
+    }
+
+    // Launch puppeteer
+    const browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox"],
+    });
+    const page = await browser.newPage();
+
+    // Set content
+    await page.setContent(
+      await res.render("quotation", {
+        formNumber: form.formNumber,
+        customer: form.customer,
+        machine: form.machine,
+        totalPrice: form.totalPrice,
+        gstPercentage: form.gstPercentage,
+        gstAmount: form.gstAmount,
+        discount: form.discount,
+        finalTotal: form.finalTotal,
+        advance: form.advance,
+        delivery: form.delivery,
+        warranty: form.warranty,
+        validity: form.validity,
+      })
+    );
+
+    // Generate PDF
+    const pdf = await page.pdf({
+      format: "A4",
+      printBackground: true,
+      margin: {
+        top: "20px",
+        right: "20px",
+        bottom: "20px",
+        left: "20px",
+      },
+    });
+
+    await browser.close();
+
+    // Set response headers
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=quotation-${form.formNumber}.pdf`
+    );
+
+    // Send the PDF
+    res.send(pdf);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    res.status(500).json({
+      status: false,
+      message: "Error generating PDF",
+      error: error.message,
+    });
   }
 };

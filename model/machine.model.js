@@ -47,6 +47,7 @@ const dynamicFieldSchema = new mongoose.Schema({
   placeholder: String,
   description: String,
   order: { type: Number, default: 0 },
+  subOrder: { type: Number, default: 0 },
 });
 
 // Schema for custom fields

@@ -5,9 +5,28 @@ const response = require("../helper/response");
 // Create new form submission
 exports.createForm = async (req, res) => {
   try {
-    const { machine, customer, fieldValues, customFieldValues, notes } =
-      req.body;
-
+    const {
+      machine,
+      customer,
+      fieldValues,
+      customFieldValues,
+      notes,
+      // Pricing Details
+      totalPrice,
+      addons,
+      gstPercentage,
+      gstAmount,
+      discount,
+      finalTotal,
+      // Business Details
+      advance,
+      cancellation,
+      delivery,
+      insurance,
+      warranty,
+      validity,
+    } = req.body;
+    console.log(req.body);
     // Validate machine exists
     const machineExists = await Machine.findOne({ _id: machine });
     if (!machineExists) {
@@ -39,6 +58,20 @@ exports.createForm = async (req, res) => {
       fieldValues,
       customFieldValues,
       notes,
+      // Pricing Details
+      totalPrice,
+      addons,
+      gstPercentage,
+      gstAmount,
+      discount,
+      finalTotal,
+      // Business Details
+      advance,
+      cancellation,
+      delivery,
+      insurance,
+      warranty,
+      validity,
       status: "draft",
     });
 
@@ -54,9 +87,9 @@ exports.createForm = async (req, res) => {
 exports.getAllForms = async (req, res) => {
   try {
     const forms = await MachineForm.find()
-      .populate("machine", "name")
-      .populate("customer", "fullName companyName")
-      .populate("submittedBy", "username")
+      .populate("machine")
+      .populate("customer")
+      .populate("submittedBy")
       .sort({ createdAt: -1 });
 
     res.status(200).json(response(true, "Forms retrieved successfully", forms));
@@ -86,23 +119,58 @@ exports.getFormById = async (req, res) => {
 // Update form
 exports.updateForm = async (req, res) => {
   try {
-    const { fieldValues, customFieldValues, notes } = req.body;
+    const {
+      machine,
+      customer,
+      fieldValues,
+      customFieldValues,
+      notes,
+      // Pricing Details
+      totalPrice,
+      addons,
+      gstPercentage,
+      gstAmount,
+      discount,
+      finalTotal,
+      // Business Details
+      advance,
+      cancellation,
+      delivery,
+      insurance,
+      warranty,
+      validity,
+      bankDetails,
+    } = req.body;
+
     const form = await MachineForm.findById(req.params.id);
 
     if (!form) {
       return res.status(404).json(response(false, "Form not found"));
     }
 
-    // Only allow updates if form is in draft status
-    if (form.status !== "draft") {
-      return res
-        .status(400)
-        .json(response(false, "Cannot update submitted form"));
-    }
-
+    // Update basic fields
+    form.machine = machine;
+    form.customer = customer;
     form.fieldValues = fieldValues;
     form.customFieldValues = customFieldValues;
     form.notes = notes;
+
+    // Update pricing details
+    form.totalPrice = totalPrice;
+    form.addons = addons;
+    form.gstPercentage = gstPercentage;
+    form.gstAmount = gstAmount;
+    form.discount = discount;
+    form.finalTotal = finalTotal;
+
+    // Update business details
+    form.advance = advance;
+    form.cancellation = cancellation;
+    form.delivery = delivery;
+    form.insurance = insurance;
+    form.warranty = warranty;
+    form.validity = validity;
+    form.bankDetails = bankDetails;
 
     await form.save();
     res.status(200).json(response(true, "Form updated successfully", form));
@@ -178,7 +246,7 @@ exports.deleteForm = async (req, res) => {
         .json(response(false, "Cannot delete submitted form"));
     }
 
-    await form.remove();
+    await MachineForm.findByIdAndDelete(req.params.id);
     res.status(200).json(response(true, "Form deleted successfully"));
   } catch (error) {
     res.status(500).json(response(false, error.message));
