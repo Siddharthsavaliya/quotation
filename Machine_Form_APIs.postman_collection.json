@@ -26,9 +26,9 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"machine\": \"{{machine_id}}\",\n    \"customer\": \"{{customer_id}}\",\n    \"fieldValues\": [\n        {\n            \"fieldId\": \"field1\",\n            \"value\": \"Sample Value\",\n            \"section\": 1\n        }\n    ],\n    \"customFieldValues\": [\n        {\n            \"fieldId\": \"custom1\",\n            \"value\": \"Custom Value\",\n            \"section\": 1\n        }\n    ]\n}"
+          "raw": "{\n    \"customer\": \"{{customer_id}}\",\n    \"machines\": [\n        {\n            \"machine\": \"{{machine_id}}\",\n            \"fieldValues\": [\n                {\n                    \"fieldId\": \"field1\",\n                    \"value\": \"Sample Value\",\n                    \"section\": 1\n                }\n            ],\n            \"customFieldValues\": [\n                {\n                    \"title\": \"Custom Field 1\",\n                    \"value\": \"Custom Value\",\n                    \"section\": 1\n                }\n            ],\n            \"totalPrice\": 1000,\n            \"addons\": [\n                {\n                    \"title\": \"Addon 1\",\n                    \"amount\": 100\n                }\n            ],\n            \"gstPercentage\": 18,\n            \"gstAmount\": 180,\n            \"discount\": 50,\n            \"finalTotal\": 1130\n        }\n    ],\n    \"advance\": \"30%\",\n    \"cancellation\": \"No cancellation\",\n    \"delivery\": \"2 weeks\",\n    \"insurance\": \"1 year\",\n    \"warranty\": \"2 years\",\n    \"validity\": \"30 days\"\n}"
         },
-        "description": "Create a new machine form submission"
+        "description": "Create a new machine form submission with multiple machines"
       }
     },
     {
@@ -88,7 +88,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"fieldValues\": [\n        {\n            \"fieldId\": \"field1\",\n            \"value\": \"Updated Value\",\n            \"section\": 1\n        }\n    ],\n    \"customFieldValues\": [\n        {\n            \"fieldId\": \"custom1\",\n            \"value\": \"Updated Custom Value\",\n            \"section\": 1\n        }\n    ]\n}"
+          "raw": "{\n    \"customer\": \"{{customer_id}}\",\n    \"machines\": [\n        {\n            \"machine\": \"{{machine_id}}\",\n            \"fieldValues\": [\n                {\n                    \"fieldId\": \"field1\",\n                    \"value\": \"Updated Value\",\n                    \"section\": 1\n                }\n            ],\n            \"customFieldValues\": [\n                {\n                    \"title\": \"Custom Field 1\",\n                    \"value\": \"Updated Custom Value\",\n                    \"section\": 1\n                }\n            ],\n            \"totalPrice\": 1200,\n            \"addons\": [\n                {\n                    \"title\": \"Addon 1\",\n                    \"amount\": 150\n                }\n            ],\n            \"gstPercentage\": 18,\n            \"gstAmount\": 216,\n            \"discount\": 50,\n            \"finalTotal\": 1366\n        }\n    ],\n    \"advance\": \"40%\",\n    \"cancellation\": \"No cancellation\",\n    \"delivery\": \"3 weeks\",\n    \"insurance\": \"1 year\",\n    \"warranty\": \"2 years\",\n    \"validity\": \"30 days\"\n}"
         },
         "description": "Update a machine form submission (draft only)"
       }

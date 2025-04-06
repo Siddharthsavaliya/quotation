@@ -45,16 +45,43 @@ const customFieldValueSchema = new mongoose.Schema({
   order: { type: Number, default: 0 },
 });
 
+// Schema for machine items in cart
+const machineItemSchema = new mongoose.Schema({
+  machine: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Machine",
+    required: true,
+  },
+  fieldValues: [fieldValueSchema],
+  customFieldValues: [customFieldValueSchema],
+  totalPrice: {
+    type: Number,
+    required: true,
+  },
+  addons: [addonSchema],
+  gstPercentage: {
+    type: Number,
+    required: true,
+  },
+  gstAmount: {
+    type: Number,
+    required: true,
+  },
+  discount: {
+    type: Number,
+    default: 0,
+  },
+  finalTotal: {
+    type: Number,
+    required: true,
+  },
+});
+
 const machineFormSchema = new mongoose.Schema(
   {
     formNumber: {
       type: String,
       unique: true,
-    },
-    machine: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Machine",
-      required: true,
     },
     customer: {
       type: mongoose.Schema.Types.ObjectId,
@@ -66,23 +93,17 @@ const machineFormSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    fieldValues: [fieldValueSchema],
-    customFieldValues: [customFieldValueSchema],
-    // Pricing Details
+    machines: [machineItemSchema],
+    // Overall pricing details
     totalPrice: {
       type: Number,
       required: true,
     },
-    addons: [addonSchema],
-    gstPercentage: {
+    totalGstAmount: {
       type: Number,
       required: true,
     },
-    gstAmount: {
-      type: Number,
-      required: true,
-    },
-    discount: {
+    totalDiscount: {
       type: Number,
       default: 0,
     },
@@ -115,12 +136,12 @@ const machineFormSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    notes: String,
     status: {
       type: String,
       enum: ["draft", "submitted", "approved", "rejected"],
       default: "draft",
     },
-    notes: String,
   },
   {
     timestamps: true,

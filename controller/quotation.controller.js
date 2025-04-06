@@ -224,9 +224,15 @@ exports.generateQuotationPDF = async (req, res) => {
   try {
     const { formId } = req.params;
 
-    // Find the machine form
+    // Find the machine form and populate all necessary fields
     const form = await MachineForm.findById(formId)
-      .populate("machine")
+      .populate({
+        path: "machines.machine",
+        model: "Machine",
+        populate: {
+          path: "fields",
+        },
+      })
       .populate("customer")
       .populate("submittedBy");
 
@@ -237,6 +243,46 @@ exports.generateQuotationPDF = async (req, res) => {
       });
     }
 
+    // Calculate totals
+    const totalPrice = form.machines.reduce(
+      (sum, machine) => sum + machine.totalPrice,
+      0
+    );
+    const totalGstAmount = form.machines.reduce(
+      (sum, machine) => sum + machine.gstAmount,
+      0
+    );
+    const totalDiscount = form.machines.reduce(
+      (sum, machine) => sum + (machine.discount || 0),
+      0
+    );
+    const finalTotal = form.machines.reduce(
+      (sum, machine) => sum + machine.finalTotal,
+      0
+    );
+
+    // Construct terms and conditions from business details
+    const terms = `
+1. Payment Terms:
+   ${form.advance}
+
+2. Cancellation Policy:
+   ${form.cancellation}
+
+3. Delivery Terms:
+   ${form.delivery}
+
+4. Insurance:
+   ${form.insurance}
+
+5. Warranty:
+   ${form.warranty}
+
+6. Validity:
+   ${form.validity}
+
+${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
+
     // Launch puppeteer
     const browser = await puppeteer.launch({
       headless: "new",
@@ -244,34 +290,43 @@ exports.generateQuotationPDF = async (req, res) => {
     });
     const page = await browser.newPage();
 
-    // Set content
-    await page.setContent(
-      await res.render("quotation", {
-        formNumber: form.formNumber,
-        customer: form.customer,
-        machine: form.machine,
-        totalPrice: form.totalPrice,
-        gstPercentage: form.gstPercentage,
-        gstAmount: form.gstAmount,
-        discount: form.discount,
-        finalTotal: form.finalTotal,
-        advance: form.advance,
-        delivery: form.delivery,
-        warranty: form.warranty,
-        validity: form.validity,
-      })
-    );
+    // Read the EJS template
+    const templatePath = path.join(__dirname, "../views/quotation.ejs");
+    const template = fs.readFileSync(templatePath, "utf-8");
 
-    // Generate PDF
+    // Render the template with data
+    const html = ejs.render(template, {
+      formNumber: form.formNumber,
+      customer: form.customer,
+      machines: form.machines,
+      totalPrice,
+      totalGstAmount,
+      totalDiscount,
+      finalTotal,
+      terms,
+      advance: form.advance,
+      cancellation: form.cancellation,
+      delivery: form.delivery,
+      insurance: form.insurance,
+      warranty: form.warranty,
+      validity: form.validity,
+      notes: form.notes,
+    });
+
+    // Set content
+    await page.setContent(html);
+
+    // Generate PDF with proper styling
     const pdf = await page.pdf({
       format: "A4",
       printBackground: true,
       margin: {
         top: "20px",
+        left: "20px",
         right: "20px",
         bottom: "20px",
-        left: "20px",
       },
+      preferCSSPageSize: true,
     });
 
     await browser.close();

@@ -6,18 +6,9 @@ const response = require("../helper/response");
 exports.createForm = async (req, res) => {
   try {
     const {
-      machine,
       customer,
-      fieldValues,
-      customFieldValues,
+      machines,
       notes,
-      // Pricing Details
-      totalPrice,
-      addons,
-      gstPercentage,
-      gstAmount,
-      discount,
-      finalTotal,
       // Business Details
       advance,
       cancellation,
@@ -27,43 +18,59 @@ exports.createForm = async (req, res) => {
       validity,
     } = req.body;
     console.log(req.body);
-    // Validate machine exists
-    const machineExists = await Machine.findOne({ _id: machine });
-    if (!machineExists) {
-      return res.status(404).json(response(false, "Machine not found"));
+    // Validate all machines exist and required fields are filled
+    for (const machineItem of machines) {
+      const machineExists = await Machine.findOne({ _id: machineItem.machine });
+      if (!machineExists) {
+        return res
+          .status(404)
+          .json(response(false, `Machine ${machineItem.machine} not found`));
+      }
+
+      // Validate all required fields are filled for each machine
+      const machineFields = machineExists.fields.filter(
+        (field) => field.isRequired
+      );
+      const missingFields = machineFields.filter((field) => {
+        return !machineItem.fieldValues.some(
+          (fv) => fv.fieldId.toString() === field._id.toString()
+        );
+      });
+
+      if (missingFields.length > 0) {
+        return res.status(400).json(
+          response(
+            false,
+            `Missing required fields for machine ${machineExists.name}`,
+            {
+              missingFields: missingFields.map((field) => field.title),
+            }
+          )
+        );
+      }
     }
 
-    // Validate all required fields are filled
-    const machineFields = machineExists.fields.filter(
-      (field) => field.isRequired
+    // Calculate overall totals
+    const totalPrice = machines.reduce((sum, item) => sum + item.totalPrice, 0);
+    const totalGstAmount = machines.reduce(
+      (sum, item) => sum + item.gstAmount,
+      0
     );
-    const missingFields = machineFields.filter((field) => {
-      return !fieldValues.some(
-        (fv) => fv.fieldId.toString() === field._id.toString()
-      );
-    });
-
-    if (missingFields.length > 0) {
-      return res.status(400).json(
-        response(false, "Missing required fields", {
-          missingFields: missingFields.map((field) => field.title),
-        })
-      );
-    }
+    const totalDiscount = machines.reduce(
+      (sum, item) => sum + (item.discount || 0),
+      0
+    );
+    const finalTotal = machines.reduce((sum, item) => sum + item.finalTotal, 0);
 
     const form = new MachineForm({
-      machine,
       customer,
       submittedBy: req.user._id,
-      fieldValues,
-      customFieldValues,
+      machines,
       notes,
-      // Pricing Details
+      // Overall pricing details
       totalPrice,
-      addons,
-      gstPercentage,
-      gstAmount,
-      discount,
+      totalGstAmount,
+      totalDiscount,
       finalTotal,
       // Business Details
       advance,
@@ -78,7 +85,6 @@ exports.createForm = async (req, res) => {
     await form.save();
     res.status(201).json(response(true, "Form created successfully", form));
   } catch (error) {
-    console.log(error);
     res.status(500).json(response(false, error.message));
   }
 };
@@ -87,7 +93,10 @@ exports.createForm = async (req, res) => {
 exports.getAllForms = async (req, res) => {
   try {
     const forms = await MachineForm.find()
-      .populate("machine")
+      .populate({
+        path: "machines.machine",
+        model: "Machine",
+      })
       .populate("customer")
       .populate("submittedBy")
       .sort({ createdAt: -1 });
@@ -102,7 +111,10 @@ exports.getAllForms = async (req, res) => {
 exports.getFormById = async (req, res) => {
   try {
     const form = await MachineForm.findById(req.params.id)
-      .populate("machine")
+      .populate({
+        path: "machines.machine",
+        model: "Machine",
+      })
       .populate("customer")
       .populate("submittedBy", "username");
 
@@ -120,18 +132,9 @@ exports.getFormById = async (req, res) => {
 exports.updateForm = async (req, res) => {
   try {
     const {
-      machine,
       customer,
-      fieldValues,
-      customFieldValues,
+      machines,
       notes,
-      // Pricing Details
-      totalPrice,
-      addons,
-      gstPercentage,
-      gstAmount,
-      discount,
-      finalTotal,
       // Business Details
       advance,
       cancellation,
@@ -139,7 +142,6 @@ exports.updateForm = async (req, res) => {
       insurance,
       warranty,
       validity,
-      bankDetails,
     } = req.body;
 
     const form = await MachineForm.findById(req.params.id);
@@ -148,29 +150,64 @@ exports.updateForm = async (req, res) => {
       return res.status(404).json(response(false, "Form not found"));
     }
 
-    // Update basic fields
-    form.machine = machine;
+    // Validate all machines exist and required fields are filled
+    for (const machineItem of machines) {
+      const machineExists = await Machine.findOne({ _id: machineItem.machine });
+      if (!machineExists) {
+        return res
+          .status(404)
+          .json(response(false, `Machine ${machineItem.machine} not found`));
+      }
+
+      // Validate all required fields are filled for each machine
+      const machineFields = machineExists.fields.filter(
+        (field) => field.isRequired
+      );
+      const missingFields = machineFields.filter((field) => {
+        return !machineItem.fieldValues.some(
+          (fv) => fv.fieldId.toString() === field._id.toString()
+        );
+      });
+
+      if (missingFields.length > 0) {
+        return res.status(400).json(
+          response(
+            false,
+            `Missing required fields for machine ${machineExists.name}`,
+            {
+              missingFields: missingFields.map((field) => field.title),
+            }
+          )
+        );
+      }
+    }
+
+    // Calculate overall totals
+    const totalPrice = machines.reduce((sum, item) => sum + item.totalPrice, 0);
+    const totalGstAmount = machines.reduce(
+      (sum, item) => sum + item.gstAmount,
+      0
+    );
+    const totalDiscount = machines.reduce(
+      (sum, item) => sum + (item.discount || 0),
+      0
+    );
+    const finalTotal = machines.reduce((sum, item) => sum + item.finalTotal, 0);
+
+    // Update form fields
     form.customer = customer;
-    form.fieldValues = fieldValues;
-    form.customFieldValues = customFieldValues;
+    form.machines = machines;
     form.notes = notes;
-
-    // Update pricing details
     form.totalPrice = totalPrice;
-    form.addons = addons;
-    form.gstPercentage = gstPercentage;
-    form.gstAmount = gstAmount;
-    form.discount = discount;
+    form.totalGstAmount = totalGstAmount;
+    form.totalDiscount = totalDiscount;
     form.finalTotal = finalTotal;
-
-    // Update business details
     form.advance = advance;
     form.cancellation = cancellation;
     form.delivery = delivery;
     form.insurance = insurance;
     form.warranty = warranty;
     form.validity = validity;
-    form.bankDetails = bankDetails;
 
     await form.save();
     res.status(200).json(response(true, "Form updated successfully", form));
