@@ -336,7 +336,7 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `inline; filename=quotation-${form.formNumber}.pdf`
+      `attachment; filename=quotation-${form.formNumber}.pdf`
     );
 
     // Send the PDF
