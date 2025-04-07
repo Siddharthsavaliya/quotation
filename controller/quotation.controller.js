@@ -5,7 +5,9 @@ const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
-const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer");
+import chromium from "chrome-aws-lambda";
+import puppeteer from "puppeteer-core";
 const MachineForm = require("../model/machineForm.model");
 
 // Create new quotation
@@ -284,10 +286,17 @@ exports.generateQuotationPDF = async (req, res) => {
 ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
 
     // Launch puppeteer
-    const browser = await puppeteer.launch({
-      headless: "new",
-      args: ["--no-sandbox"],
+    // const browser = await puppeteer.launch({
+    //   headless: "new",
+    //   args: ["--no-sandbox"],
+    // });
+    browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
     });
+
     const page = await browser.newPage();
 
     // Read the EJS template
