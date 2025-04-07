@@ -113,7 +113,7 @@ const updateUser = async (req, res) => {
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { $set: req.body },
+      { $set: { ...req.body } },
       { new: true, runValidators: true }
     ).select("-password");
 
