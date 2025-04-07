@@ -290,6 +290,7 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     //   headless: "new",
     //   args: ["--no-sandbox"],
     // });
+    const executablePath = await chromium.executablePath;
     const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
