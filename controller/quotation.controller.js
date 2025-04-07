@@ -291,7 +291,7 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     //   args: ["--no-sandbox"],
     // });
 
-    browser = await chromium.puppeteer.launch({
+    const browser = await chromium.puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
