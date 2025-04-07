@@ -6,8 +6,8 @@ const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
 // const puppeteer = require("puppeteer");
-import chromium from "chrome-aws-lambda";
-import puppeteer from "puppeteer-core";
+const chromium = require("@sparticuz/chromium");
+const puppeteer = require("puppeteer-core");
 const MachineForm = require("../model/machineForm.model");
 
 // Create new quotation
@@ -291,10 +291,10 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     //   args: ["--no-sandbox"],
     // });
 
-    const browser = await chromium.puppeteer.launch({
+    const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
+      executablePath: await chromium.executablePath(),
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
