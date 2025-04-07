@@ -234,7 +234,7 @@ exports.generateQuotationPDF = async (req, res) => {
         },
       })
       .populate("customer")
-      .populate("submittedBy");
+      .populate("submittedBy", "username phone");
 
     if (!form) {
       return res.status(404).json({
@@ -293,12 +293,13 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     // Read the EJS template
     const templatePath = path.join(__dirname, "../views/quotation.ejs");
     const template = fs.readFileSync(templatePath, "utf-8");
-
+    console.log(form.machines[0].fieldValues);
     // Render the template with data
     const html = ejs.render(template, {
       formNumber: form.formNumber,
       customer: form.customer,
       machines: form.machines,
+      submittedBy: form.submittedBy,
       totalPrice,
       totalGstAmount,
       totalDiscount,
@@ -335,7 +336,7 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=quotation-${form.formNumber}.pdf`
+      `inline; filename=quotation-${form.formNumber}.pdf`
     );
 
     // Send the PDF

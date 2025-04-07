@@ -13,106 +13,410 @@
             font-family: Arial, sans-serif;
         }
 
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
         body {
             background: #fff;
-            padding: 20px;
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
         }
 
         .page {
-            margin-bottom: 30px;
+            position: relative;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            page-break-after: always;
+            background: white;
         }
 
-        .page-break {
-            page-break-after: always;
+        .page:last-child {
+            padding-bottom: 35mm;
+        }
+
+        .page-number {
+            position: fixed;
+            bottom: 10mm;
+            right: 15mm;
+            font-size: 12px;
+            color: #666;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #000066;
+            padding-bottom: 15px;
         }
 
         .logo {
-            width: 200px;
-            margin-bottom: 20px;
+            width: 180px;
+            height: auto;
         }
 
-        .quotation-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-
-        .quotation-title {
-            color: #000066;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .quotation-details {
+        .quotation-info {
             text-align: right;
+            font-size: 13px;
+            line-height: 1.5;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .sales-person {
+            text-align: right;
+            margin-bottom: 25px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #444;
         }
 
         .quotation-to {
             margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .quotation-to h3 {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #000066;
+            border-bottom: 2px solid #000066;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .quotation-to p {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 3px;
+            color: #444;
         }
 
         .subject-line {
             margin-bottom: 20px;
         }
 
+        .subject-line p {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
         .annexure-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            background: #f8f9fa;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .annexure-table tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .annexure-table tr:last-child {
+            border-bottom: none;
         }
 
         .annexure-table td {
-            padding: 8px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .annexure-table td:last-child {
-            text-align: right;
+            padding: 12px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #444;
         }
 
         .blue-header {
             background-color: #000066;
             color: white;
-            padding: 10px;
-            margin: 20px 0;
+            padding: 12px 15px;
+            margin: 0 0 15px 0;
+            border-radius: 4px;
+        }
+
+        .blue-header h2 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            line-height: 1.2;
         }
 
         .technical-table,
         .financial-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 15px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
         .technical-table th,
         .technical-table td,
         .financial-table th,
         .financial-table td {
-            border: 1px solid #000;
-            padding: 8px;
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #444;
         }
 
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            border-top: 2px solid #000066;
-            padding-top: 10px;
+        .technical-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: left;
+            color: #000066;
         }
 
         .terms-content {
             white-space: pre-wrap;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 14px;
+            line-height: 1.5;
+            font-size: 13px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            color: #444;
+            margin-bottom: 30px;
         }
 
-        .terms-content p {
+        .footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 15mm;
+            right: 15mm;
+            text-align: center;
+            padding-top: 10px;
+            border-top: 2px solid #000066;
+            background: white;
+        }
+
+        .footer p {
+            margin: 2px 0;
+            color: #000066;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #000066;
+            padding-bottom: 8px;
             margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .financial-table tr:last-child {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .financial-table tr:last-child td {
+            border-top: 2px solid #000066;
+        }
+
+        .machine-details {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .machine-section {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .machine-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .total-summary {
+            margin-top: 30px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-top: 2px solid #000066;
+        }
+
+        .total-summary .section-title {
+            color: #000066;
+            margin-top: 0;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 0 0;
+        }
+
+        .summary-table td {
+            padding: 8px 12px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .summary-table tr:last-child {
+            font-weight: bold;
+            font-size: 14px;
+            border-top: 2px solid #000066;
+        }
+
+        .summary-table tr:last-child td {
+            padding-top: 12px;
+        }
+
+        .technical-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            page-break-inside: auto;
+        }
+
+        .technical-table tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        .technical-content {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            page-break-inside: auto;
+        }
+
+        .machine-section {
+            background: white;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            page-break-inside: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .machine-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #000066;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .technical-table th,
+        .technical-table td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #444;
+        }
+
+        .technical-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: left;
+            color: #000066;
+        }
+
+        .technical-table thead {
+            display: table-header-group;
         }
 
         @media print {
-            .page-break {
+            body {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                margin: 0;
+                padding: 15mm;
+                border: initial;
+                border-radius: initial;
+                width: initial;
+                min-height: initial;
+                box-shadow: initial;
+                background: initial;
                 page-break-after: always;
+                position: relative;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            td {
+                page-break-inside: avoid;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+
+            .page-number {
+                position: absolute;
+                bottom: 10mm;
+                right: 15mm;
+                background: none;
+                padding: 0;
+            }
+
+            .page:last-child .page-number {
+                bottom: 35mm;
+            }
+
+            .technical-table thead {
+                display: table-header-group;
+            }
+
+            .technical-table tfoot {
+                display: table-footer-group;
+            }
+
+            .technical-table tr {
+                page-break-inside: avoid;
+            }
+
+            .technical-content,
+            .machine-section {
+                page-break-inside: auto;
             }
         }
     </style>
@@ -121,21 +425,30 @@
 <body>
     <!-- First Page -->
     <div class="page">
-        <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech" class="logo">
-
-        <div class="quotation-header">
-            <div>
-                <h1 class="quotation-title">QUOTATION</h1>
-                <p>Quotation No, #<%= formNumber %>
+        <div class="header">
+            <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech" class="logo">
+            <div class="quotation-info">
+                <p><strong>Quotation No:</strong> #<%= formNumber %>
                 </p>
-                <p>Date, <%= new Date().toLocaleDateString('en-GB', { day: '2-digit' , month: 'short' , year: '2-digit'
-                        }) %>
+                <p><strong>Date:</strong>
+                    <%= new Date().toLocaleDateString('en-GB', { day: '2-digit' , month: 'short' , year: '2-digit' }) %>
                 </p>
             </div>
         </div>
 
+        <div class="sales-person">
+            <% if (typeof submittedBy !=='undefined' && submittedBy) { %>
+                <p><strong>Sales Person:</strong>
+                    <%= submittedBy.username || 'N/A' %>
+                </p>
+                <p>
+                    <%= submittedBy.phone || '' %>
+                </p>
+                <% } %>
+        </div>
+
         <div class="quotation-to">
-            <h3>QUOTATION TO,</h3>
+            <h3>QUOTATION TO:</h3>
             <p>
                 <%= customer.companyName %>
             </p>
@@ -145,147 +458,171 @@
         </div>
 
         <div class="subject-line">
-            <p>Subject: Technical & Financial Proposal for ___________________</p>
+            <p><strong>Subject:</strong> Technical & Financial Proposal for <%= machines[0].machine.name %>
+            </p>
             <p>Dear Sir,</p>
+            <p>We are pleased to submit our proposal for <%= machines[0].machine.name %>. Please find the detailed
+                    specifications and terms below:</p>
         </div>
 
         <table class="annexure-table">
             <tr>
                 <td>Annexure - 1</td>
                 <td>Technical Proposal</td>
-                <td>Page. 1</td>
+                <td style="text-align: right;">Page 2</td>
             </tr>
             <tr>
                 <td>Annexure - 2</td>
                 <td>Financial Proposal</td>
-                <td>Page. 2</td>
+                <td style="text-align: right;">Page 3</td>
             </tr>
             <tr>
                 <td>Annexure - 3</td>
-                <td>Terms & Condition</td>
-                <td>Page. 3</td>
+                <td>Terms & Conditions</td>
+                <td style="text-align: right;">Page 4</td>
             </tr>
         </table>
-
-        <div class="footer">
-            <p>Ashok Extrusiontech PVT LTD</p>
-            <p>984, Gokul Nagar, Makarpura GIDC, Makarpura, Vadodara, Gujarat 390010</p>
-            <p>info@ashokextrusiontech.com - www.ashokextrusiontech.com</p>
-        </div>
+        <div class="page-number">Page 1 of 4</div>
     </div>
-
-    <!-- Page Break -->
-    <div class="page-break"></div>
 
     <!-- Technical Proposal Page -->
-    <div class="page">
-        <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech" class="logo">
-
-        <div class="blue-header">
-            <h2>ANNEXURE - 1</h2>
+    <% machines.forEach((machineItem, machineIndex)=> { %>
+        <div class="page">
+            <div class="blue-header">
+                <h2>ANNEXURE - 1<%= machineIndex> 0 ? `-${machineIndex+1}` : '' %></h2>
+            </div>
+            <div class="technical-content">
+                <div class="machine-section">
+                    <div class="section-title">Technical Proposal for <%= machineItem.machine.name %>
+                    </div>
+                    <table class="technical-table">
+                        <thead>
+                            <tr>
+                                <th width="10%">No.</th>
+                                <th width="45%">Item</th>
+                                <th width="45%">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% machineItem.fieldValues.forEach((fieldValue, index)=> {
+                                const field = machineItem.machine.fields.find(f => f._id.toString() ===
+                                fieldValue.fieldId.toString());
+                                if (field && fieldValue.value && fieldValue.value.trim() !== '') { %>
+                                <tr>
+                                    <td>
+                                        <%= index + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= field.title %>
+                                    </td>
+                                    <td>
+                                        <%= fieldValue.value %>
+                                    </td>
+                                </tr>
+                                <% }}) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="page-number">Page <%= 2 + machineIndex %> of <%= 3 + machines.length %>
+            </div>
         </div>
+        <% }) %>
 
-        <h3>Technical Proposal for <%= machines[0].machine.name %>
-        </h3>
+            <!-- Financial Proposal Page -->
+            <div class="page">
+                <div class="blue-header">
+                    <h2>ANNEXURE - <%= 1 + machines.length + 1 %>
+                    </h2>
+                </div>
 
-        <table class="technical-table">
-            <tr>
-                <th>No.</th>
-                <th>Item</th>
-                <th>Description</th>
-            </tr>
-            <% machines[0].fieldValues.forEach((fieldValue, index)=> {
-                const field = machines[0].machine.fields.find(f => f._id.toString() === fieldValue.fieldId.toString());
-                if (field) { %>
-                <tr>
-                    <td>
-                        <%= index + 1 %>
-                    </td>
-                    <td>
-                        <%= field.title %>
-                    </td>
-                    <td>
-                        <%= fieldValue.value %>
-                    </td>
-                </tr>
-                <% }}) %>
-        </table>
+                <div class="machine-details">
+                    <div class="section-title">Financial Proposal</div>
 
-        <div class="footer">
-            <p>Ashok Extrusiontech PVT LTD</p>
-            <p>984, Gokul Nagar, Makarpura GIDC, Makarpura, Vadodara, Gujarat 390010</p>
-            <p>info@ashokextrusiontech.com - www.ashokextrusiontech.com</p>
-        </div>
-    </div>
+                    <% machines.forEach((machineItem, index)=> { %>
+                        <div class="machine-section break-inside-avoid">
+                            <table class="financial-table break-inside-avoid">
+                                <tbody>
+                                    <tr>
+                                        <td width="60%"><strong>Machine Name</strong></td>
+                                        <td width="40%">
+                                            <%= machineItem.machine.name %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rate</td>
+                                        <td>₹<%= machineItem.totalPrice.toLocaleString() %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>GST (<%= machineItem.gstPercentage %>%)</td>
+                                        <td>₹<%= machineItem.gstAmount.toLocaleString() %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discount</td>
+                                        <td>₹<%= machineItem.discount.toLocaleString() %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total</strong></td>
+                                        <td><strong>₹<%= machineItem.finalTotal.toLocaleString() %></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% }) %>
 
-    <!-- Page Break -->
-    <div class="page-break"></div>
+                            <div class="total-summary break-inside-avoid">
+                                <div class="section-title">Total Summary</div>
+                                <table class="summary-table break-inside-avoid">
+                                    <tbody>
+                                        <tr>
+                                            <td width="60%">Total Base Price</td>
+                                            <td width="40%">₹<%= machines.reduce((sum, m)=> sum + m.totalPrice,
+                                                    0).toLocaleString() %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total GST</td>
+                                            <td>₹<%= machines.reduce((sum, m)=> sum + m.gstAmount, 0).toLocaleString()
+                                                    %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Discount</td>
+                                            <td>₹<%= machines.reduce((sum, m)=> sum + m.discount, 0).toLocaleString() %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Final Total</td>
+                                            <td>₹<%= machines.reduce((sum, m)=> sum + m.finalTotal, 0).toLocaleString()
+                                                    %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+                <div class="page-number">Page <%= 2 + machines.length %> of <%= 3 + machines.length %>
+                </div>
+            </div>
 
-    <!-- Financial Proposal Page -->
-    <div class="page">
-        <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech" class="logo">
+            <!-- Terms & Conditions Page -->
+            <div class="page">
+                <div class="blue-header">
+                    <h2>ANNEXURE - <%= 1 + machines.length + 2 %> TERMS & CONDITIONS</h2>
+                </div>
 
-        <div class="blue-header">
-            <h2>ANNEXURE - 2</h2>
-        </div>
-
-        <h3>Financial Proposal for <%= machines[0].machine.name %>
-        </h3>
-
-        <% machines.forEach(machineItem=> { %>
-            <table class="financial-table">
-                <tr>
-                    <td>Machine Name</td>
-                    <td>
-                        <%= machineItem.machine.name %>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Rate</td>
-                    <td>₹<%= machineItem.totalPrice.toLocaleString() %>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Discount</td>
-                    <td>₹<%= machineItem.discount.toLocaleString() %>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>₹<%= machineItem.finalTotal.toLocaleString() %>
-                    </td>
-                </tr>
-            </table>
-            <% }) %>
+                <div class="terms-content">
+                    <%= terms %>
+                </div>
 
                 <div class="footer">
-                    <p>Ashok Extrusiontech PVT LTD</p>
+                    <p><strong>Ashok Extrusiontech PVT LTD</strong></p>
                     <p>984, Gokul Nagar, Makarpura GIDC, Makarpura, Vadodara, Gujarat 390010</p>
                     <p>info@ashokextrusiontech.com - www.ashokextrusiontech.com</p>
                 </div>
-    </div>
-
-    <!-- Page Break -->
-    <div class="page-break"></div>
-
-    <!-- Terms & Conditions Page -->
-    <div class="page">
-        <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech" class="logo">
-
-        <div class="blue-header">
-            <h2>ANNEXURE - 3 TERMS & CONDITION</h2>
-        </div>
-
-        <div class="terms-content">
-            <%= terms %>
-        </div>
-
-        <div class="footer">
-            <p>Ashok Extrusiontech PVT LTD</p>
-            <p>984, Gokul Nagar, Makarpura GIDC, Makarpura, Vadodara, Gujarat 390010</p>
-            <p>info@ashokextrusiontech.com - www.ashokextrusiontech.com</p>
-        </div>
-    </div>
+                <div class="page-number">Page <%= 3 + machines.length %> of <%= 3 + machines.length %>
+                </div>
+            </div>
 </body>
 
 </html>
