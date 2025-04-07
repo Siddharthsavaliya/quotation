@@ -290,11 +290,12 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     //   headless: "new",
     //   args: ["--no-sandbox"],
     // });
-    browser = await puppeteer.launch({
+    const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
+      executablePath,
       headless: chromium.headless,
+      ignoreHTTPSErrors: true,
     });
 
     const page = await browser.newPage();
