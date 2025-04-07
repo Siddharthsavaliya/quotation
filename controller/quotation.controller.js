@@ -10,7 +10,6 @@ const chromium = require("@sparticuz/chromium");
 const puppeteer = require("puppeteer-core");
 const MachineForm = require("../model/machineForm.model");
 
-
 // Create new quotation
 exports.createQuotation = async (req, res) => {
   try {
@@ -227,17 +226,20 @@ exports.generateQuotationPDF = async (req, res) => {
   try {
     const { formId } = req.params;
 
-    // Find the machine form and populate all necessary fields
+    // Find the machine form with optimized query - only select needed fields
     const form = await MachineForm.findById(formId)
       .populate({
         path: "machines.machine",
         model: "Machine",
+        select: "name fields", // Only select necessary fields
         populate: {
           path: "fields",
+          select: "title type", // Only select necessary fields
         },
       })
-      .populate("customer")
-      .populate("submittedBy", "username phone");
+      .populate("customer", "companyName phone") // Only select necessary fields
+      .populate("submittedBy", "username phone")
+      .lean(); // Use lean() for better performance with large objects
 
     if (!form) {
       return res.status(404).json({
@@ -264,36 +266,36 @@ exports.generateQuotationPDF = async (req, res) => {
       0
     );
 
-    // Construct terms and conditions from business details
+    // Construct terms and conditions
     const terms = `
 1. Payment Terms:
-   ${form.advance}
+   ${form.advance || ""}
 
 2. Cancellation Policy:
-   ${form.cancellation}
+   ${form.cancellation || ""}
 
 3. Delivery Terms:
-   ${form.delivery}
+   ${form.delivery || ""}
 
 4. Insurance:
-   ${form.insurance}
+   ${form.insurance || ""}
 
 5. Warranty:
-   ${form.warranty}
+   ${form.warranty || ""}
 
 6. Validity:
-   ${form.validity}
+   ${form.validity || ""}
 
 ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
 
-    // Launch puppeteer
-    // const browser = await puppeteer.launch({
-    //   headless: "new",
-    //   args: ["--no-sandbox"],
-    // });
-
+    // Optimized puppeteer launch options
     const browser = await puppeteer.launch({
-      args: chromium.args,
+      args: [
+        ...chromium.args,
+        "--disable-dev-shm-usage",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+      ],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath(),
       headless: chromium.headless,
@@ -302,12 +304,19 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
 
     const page = await browser.newPage();
 
-    // Read the EJS template
+    // Set resource load timeout for faster page loading
+    await page.setDefaultNavigationTimeout(0);
+    await page.setDefaultTimeout(0);
+
+    // Optimize page for performance
+    await page.setCacheEnabled(true);
+
+    // Faster content loading approach
     const templatePath = path.join(__dirname, "../views/quotation.ejs");
     const template = fs.readFileSync(templatePath, "utf-8");
-    console.log(form.machines[0].fieldValues);
-    // Render the template with data
-    const html = ejs.render(template, {
+
+    // Prep data for template
+    const templateData = {
       formNumber: form.formNumber,
       customer: form.customer,
       machines: form.machines,
@@ -317,31 +326,39 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
       totalDiscount,
       finalTotal,
       terms,
-      advance: form.advance,
-      cancellation: form.cancellation,
-      delivery: form.delivery,
-      insurance: form.insurance,
-      warranty: form.warranty,
-      validity: form.validity,
-      notes: form.notes,
+      advance: form.advance || "",
+      cancellation: form.cancellation || "",
+      delivery: form.delivery || "",
+      insurance: form.insurance || "",
+      warranty: form.warranty || "",
+      validity: form.validity || "",
+      notes: form.notes || "",
+    };
+
+    // Render the template
+    const html = ejs.render(template, templateData);
+
+    // Set content with optimized options
+    await page.setContent(html, {
+      waitUntil: "networkidle0",
+      timeout: 30000,
     });
 
-    // Set content
-    await page.setContent(html);
-
-    // Generate PDF with proper styling
+    // Generate PDF with optimized settings
     const pdf = await page.pdf({
       format: "A4",
       printBackground: true,
       margin: {
-        top: "20px",
-        left: "20px",
-        right: "20px",
-        bottom: "20px",
+        top: "10mm",
+        left: "10mm",
+        right: "10mm",
+        bottom: "10mm",
       },
       preferCSSPageSize: true,
+      timeout: 30000,
     });
 
+    // Close browser immediately after PDF generation
     await browser.close();
 
     // Set response headers

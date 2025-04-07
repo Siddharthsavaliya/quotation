@@ -39,14 +39,12 @@
         }
 
         .page-number {
-            position: fixed;
+            position: absolute;
             bottom: 10mm;
             right: 15mm;
             font-size: 12px;
             color: #666;
-            background: white;
-            padding: 5px 10px;
-            border-radius: 3px;
+            z-index: 1;
         }
 
         .header {
@@ -237,8 +235,11 @@
         }
 
         .machine-section {
+            background: white;
+            border-radius: 4px;
+            padding: 15px;
             margin-bottom: 15px;
-            page-break-inside: avoid;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .machine-section:last-child {
@@ -280,68 +281,11 @@
             padding-top: 12px;
         }
 
-        .technical-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 4px;
-            overflow: hidden;
-            page-break-inside: auto;
-        }
-
-        .technical-table tr {
-            page-break-inside: avoid;
-            page-break-after: auto;
-        }
-
         .technical-content {
             background: #f8f9fa;
             padding: 15px;
             border-radius: 4px;
             margin-bottom: 20px;
-            page-break-inside: auto;
-        }
-
-        .machine-section {
-            background: white;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 15px;
-            page-break-inside: auto;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .machine-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .section-title {
-            font-size: 15px;
-            font-weight: bold;
-            color: #000066;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .technical-table th,
-        .technical-table td {
-            border: 1px solid #ddd;
-            padding: 10px 12px;
-            font-size: 13px;
-            line-height: 1.4;
-            color: #444;
-        }
-
-        .technical-table th {
-            background-color: #f5f5f5;
-            font-weight: bold;
-            text-align: left;
-            color: #000066;
-        }
-
-        .technical-table thead {
-            display: table-header-group;
         }
 
         @media print {
@@ -365,20 +309,11 @@
                 position: relative;
             }
 
-            .no-print {
-                display: none !important;
-            }
-
             table {
-                page-break-inside: avoid;
+                page-break-inside: auto;
             }
 
             tr {
-                page-break-inside: avoid;
-                page-break-after: auto;
-            }
-
-            td {
                 page-break-inside: avoid;
             }
 
@@ -386,37 +321,14 @@
                 display: table-header-group;
             }
 
-            tfoot {
-                display: table-footer-group;
-            }
-
             .page-number {
                 position: absolute;
-                bottom: 10mm;
-                right: 15mm;
                 background: none;
                 padding: 0;
             }
 
             .page:last-child .page-number {
                 bottom: 35mm;
-            }
-
-            .technical-table thead {
-                display: table-header-group;
-            }
-
-            .technical-table tfoot {
-                display: table-footer-group;
-            }
-
-            .technical-table tr {
-                page-break-inside: avoid;
-            }
-
-            .technical-content,
-            .machine-section {
-                page-break-inside: auto;
             }
         }
     </style>
@@ -482,10 +394,11 @@
                 <td style="text-align: right;">Page 4</td>
             </tr>
         </table>
-        <div class="page-number">Page 1 of 4</div>
+        <div class="page-number">Page 1 of <%= 3 + machines.length %>
+        </div>
     </div>
 
-    <!-- Technical Proposal Page -->
+    <!-- Technical Proposal Pages -->
     <% machines.forEach((machineItem, machineIndex)=> { %>
         <div class="page">
             <div class="blue-header">
@@ -504,10 +417,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% machineItem.fieldValues.forEach((fieldValue, index)=> {
+                            <% if (machineItem.fieldValues && machineItem.fieldValues.length) {
+                                machineItem.fieldValues.forEach((fieldValue, index)=> {
+                                if (fieldValue && fieldValue.fieldId && fieldValue.value) {
                                 const field = machineItem.machine.fields.find(f => f._id.toString() ===
                                 fieldValue.fieldId.toString());
-                                if (field && fieldValue.value && fieldValue.value.trim() !== '') { %>
+                                if (field && fieldValue.value && fieldValue.value.trim() !== '') {
+                                %>
                                 <tr>
                                     <td>
                                         <%= index + 1 %>
@@ -519,7 +435,7 @@
                                         <%= fieldValue.value %>
                                     </td>
                                 </tr>
-                                <% }}) %>
+                                <% } } }); } %>
                         </tbody>
                     </table>
                 </div>
@@ -540,8 +456,8 @@
                     <div class="section-title">Financial Proposal</div>
 
                     <% machines.forEach((machineItem, index)=> { %>
-                        <div class="machine-section break-inside-avoid">
-                            <table class="financial-table break-inside-avoid">
+                        <div class="machine-section">
+                            <table class="financial-table">
                                 <tbody>
                                     <tr>
                                         <td width="60%"><strong>Machine Name</strong></td>
@@ -573,9 +489,9 @@
                         </div>
                         <% }) %>
 
-                            <div class="total-summary break-inside-avoid">
+                            <div class="total-summary">
                                 <div class="section-title">Total Summary</div>
-                                <table class="summary-table break-inside-avoid">
+                                <table class="summary-table">
                                     <tbody>
                                         <tr>
                                             <td width="60%">Total Base Price</td>
