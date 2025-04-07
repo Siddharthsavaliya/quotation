@@ -291,11 +291,10 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     //   args: ["--no-sandbox"],
     // });
 
-    const browser = await puppeteer.launch({
+    browser = await chromium.puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath:
-        (await chromium.executablePath) || "/usr/bin/chromium-browser", // fallback for local dev
+      executablePath: await chromium.executablePath,
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
