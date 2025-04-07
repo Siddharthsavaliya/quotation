@@ -11,11 +11,9 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
     },
     number: {
       type: String,
-      required: true,
       unique: true,
     },
     email: {
