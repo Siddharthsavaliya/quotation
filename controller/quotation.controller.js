@@ -5,9 +5,9 @@ const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
-// const puppeteer = require("puppeteer");
-const chromium = require("@sparticuz/chromium");
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
+// const chromium = require("@sparticuz/chromium");
+// const puppeteer = require("puppeteer-core");
 const MachineForm = require("../model/machineForm.model");
 
 // Create new quotation
