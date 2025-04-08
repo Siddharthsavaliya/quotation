@@ -423,6 +423,10 @@
                                 const field = machineItem.machine.fields.find(f => f._id.toString() ===
                                 fieldValue.fieldId.toString());
                                 if (field && fieldValue.value && fieldValue.value.trim() !== '') {
+                                    // Skip fields with specific titles
+                                    const skipTitles = ['VALIDITY', 'WARRANTY', 'NOTES', 'INSURANCE', 
+                                        'DELIVERY', 'CANCELLLATION', 'ADVANCE', 'GST', 'TAX', 'PRICE (INR)'];
+                                    if (!skipTitles.includes(field.title.toUpperCase())) {
                                 %>
                                 <tr>
                                     <td>
@@ -435,7 +439,7 @@
                                         <%= fieldValue.value %>
                                     </td>
                                 </tr>
-                                <% } } }); } %>
+                                <% } } } }); } %>
                         </tbody>
                     </table>
                 </div>
