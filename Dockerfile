@@ -62,4 +62,4 @@ COPY . .
 EXPOSE 8800
 
 # CMD to run your app with PM2
-CMD ["pm2-runtime", "start", "service.js"]
+CMD ["pm2-runtime", "start", "server.js"]
