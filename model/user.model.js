@@ -37,9 +37,22 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// Compare password method
+// Check the comparePassword method
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
+  try {
+    // Make sure both values are strings to avoid "Illegal arguments: string, object" error
+    if (
+      typeof candidatePassword !== "string" ||
+      typeof this.password !== "string"
+    ) {
+      return false;
+    }
+
+    return await bcrypt.compare(candidatePassword, this.password);
+  } catch (error) {
+    console.error("Password comparison error:", error);
+    return false;
+  }
 };
 
 const User = mongoose.model("User", userSchema);

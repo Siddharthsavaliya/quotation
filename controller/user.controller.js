@@ -18,11 +18,26 @@ const login = async (req, res) => {
         .json(response(false, "Please provide email and password"));
     }
 
+    // Find the user by email
     const user = await User.findOne({ email });
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user) {
       return res.status(401).json(response(false, "Invalid email or password"));
     }
 
+    // Compare passwords safely
+    try {
+      const isMatch = await user.comparePassword(password);
+      if (!isMatch) {
+        return res
+          .status(401)
+          .json(response(false, "Invalid email or password"));
+      }
+    } catch (err) {
+      console.error("Password comparison error:", err);
+      return res.status(500).json(response(false, "Authentication error"));
+    }
+
+    // Password matches, generate token
     const token = generateToken(user._id);
     res.status(200).json(
       response(true, "Login successful", {
@@ -31,6 +46,7 @@ const login = async (req, res) => {
       })
     );
   } catch (error) {
+    console.error("Login error:", error);
     const errorResponse = handleMongoError(error);
     res.status(400).json(errorResponse);
   }
