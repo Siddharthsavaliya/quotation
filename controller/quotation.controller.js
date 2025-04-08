@@ -290,16 +290,8 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
 
     // Optimized puppeteer launch options
     const browser = await puppeteer.launch({
-      args: [
-        ...chromium.args,
-        "--disable-dev-shm-usage",
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-      ],
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
-      ignoreHTTPSErrors: true,
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
     const page = await browser.newPage();
