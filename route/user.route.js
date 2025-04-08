@@ -20,8 +20,8 @@ router.use(protect);
 router.get("/profile", getProfile);
 router.post("/profile", updateUser);
 
-// Admin only routes
-router.use(restrictTo("admin"));
+// // Admin only routes
+// router.use(restrictTo("admin"));
 router.post("/", createUser);
 router.get("/", getAllUsers);
 router.post("/:id", updateUser);
