@@ -42,25 +42,25 @@ mongoose
     console.log("Connected to MongoDB");
 
     // Check if admin exists, if not create one
-    try {
-      const adminExists = await User.findOne({ role: "admin" });
-      if (!adminExists) {
-        await User.create({
-          username: "admin",
-          password: "admin123",
-          email: "admin@example.com",
-          number: "1234567890",
-          role: "admin",
-        });
-        console.log("Admin user seeded successfully");
-      }
-    } catch (error) {
-      console.error("Error seeding admin:", error);
-    }
+    // try {
+    //   const adminExists = await User.findOne({ role: "admin" });
+    //   if (!adminExists) {
+    //     await User.create({
+    //       username: "admin",
+    //       password: "admin123",
+    //       email: "admin@example.com",
+    //       number: "1234567890",
+    //       role: "admin",
+    //     });
+    //     console.log("Admin user seeded successfully");
+    //   }
+    // } catch (error) {
+    //   console.error("Error seeding admin:", error);
+    // }
   })
   .catch((error) => console.error("MongoDB connection error:", error));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
