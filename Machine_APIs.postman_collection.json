@@ -42,7 +42,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"name\": \"Extruder Machine\",\n    \"description\": \"High-performance extruder\",\n    \"fields\": [\n        {\n            \"title\": \"Barrel Size\",\n            \"type\": \"dropdown\",\n            \"valueType\": \"int\",\n            \"section\": 1,\n            \"options\": [\n                { \"label\": \"25mm\", \"value\": 25 },\n                { \"label\": \"50mm\", \"value\": 50 }\n            ],\n            \"isRequired\": true\n        },\n        {\n            \"title\": \"Temperature\",\n            \"type\": \"number\",\n            \"valueType\": \"float\",\n            \"isRequired\": true\n        }\n    ]\n}"
+          "raw": "{\n    \"name\": \"Extruder Machine\",\n    \"description\": \"High-performance extruder\",\n    \"fields\": [\n        {\n            \"title\": \"Barrel Size\",\n            \"type\": \"dropdown\",\n            \"valueType\": \"int\",\n            \"section\": 1,\n            \"options\": [\n                { \"sizes\": [\n                    { \"label\": \"25mm\", \"value\": 25, \"amount\": 0 },\n                    { \"label\": \"50mm\", \"value\": 50, \"amount\": 0 }\n                ] }\n            ],\n            \"isRequired\": true\n        },\n        {\n            \"title\": \"Temperature\",\n            \"type\": \"number\",\n            \"valueType\": \"float\",\n            \"isRequired\": true\n        }\n    ]\n}"
         },
         "url": {
           "raw": "{{base_url}}/api/machines",
@@ -108,7 +108,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"name\": \"Updated Extruder Machine\",\n    \"description\": \"Updated description\",\n    \"fields\": [\n        {\n            \"title\": \"Barrel Size\",\n            \"type\": \"dropdown\",\n            \"valueType\": \"int\",\n            \"section\": 1,\n            \"options\": [\n                { \"label\": \"25mm\", \"value\": 25 },\n                { \"label\": \"50mm\", \"value\": 50 },\n                { \"label\": \"75mm\", \"value\": 75 }\n            ],\n            \"isRequired\": true\n        }\n    ]\n}"
+          "raw": "{\n    \"name\": \"Updated Extruder Machine\",\n    \"description\": \"Updated description\",\n    \"fields\": [\n        {\n            \"title\": \"Barrel Size\",\n            \"type\": \"dropdown\",\n            \"valueType\": \"int\",\n            \"section\": 1,\n            \"options\": [\n                { \"sizes\": [\n                    { \"label\": \"25mm\", \"value\": 25, \"amount\": 0 },\n                    { \"label\": \"50mm\", \"value\": 50, \"amount\": 0 },\n                    { \"label\": \"75mm\", \"value\": 75, \"amount\": 0 }\n                ] }\n            ],\n            \"isRequired\": true\n        }\n    ]\n}"
         },
         "url": {
           "raw": "{{base_url}}/api/machines/{{machine_id}}",

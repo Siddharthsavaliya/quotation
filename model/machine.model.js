@@ -21,11 +21,14 @@ const VALUE_TYPES = {
 const fieldOptionSchema = new mongoose.Schema({
   label: { type: String, required: true },
   value: { type: mongoose.Schema.Types.Mixed, required: true },
+  amount: { type: Number, default: 0 },
 });
 
 // Schema for dynamic fields
 const dynamicFieldSchema = new mongoose.Schema({
+  fieldId: { type: String, required: true },
   title: { type: String, required: true },
+  isShowUI: { type: Boolean, default: true },
   type: {
     type: String,
     required: true,
@@ -41,8 +44,18 @@ const dynamicFieldSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
-  options: [fieldOptionSchema],
-  value: { type: mongoose.Schema.Types.Mixed },
+  isDynamic: { type: Boolean, default: false },
+  refreshDynamicField: { type: String, default: "first" },
+  options: [{
+    type: Map,
+    of: [fieldOptionSchema],
+    default: undefined
+  }],
+  value: { 
+    type: Map,
+    of: mongoose.Schema.Types.Mixed,
+    default: new Map()
+  },
   isRequired: { type: Boolean, default: false },
   placeholder: String,
   description: String,

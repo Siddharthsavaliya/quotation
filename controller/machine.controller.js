@@ -4,8 +4,23 @@ const response = require("../helper/response");
 // Create new machine
 exports.createMachine = async (req, res) => {
   try {
+    const fields = req.body.fields?.map(field => {
+      if (field.options && Array.isArray(field.options)) {
+        // Ensure options is an array of objects { keyName: [ ... ] }
+        field.options = field.options.map(optObj => {
+          // If already in correct format, return as is
+          if (typeof optObj === 'object' && !Array.isArray(optObj) && Object.values(optObj)[0] && Array.isArray(Object.values(optObj)[0])) {
+            return optObj;
+          }
+          // If old format (array of options), wrap in a default key
+          return { keyName: Array.isArray(optObj) ? optObj : [optObj] };
+        });
+      }
+      return field;
+    });
     const machine = new Machine({
       ...req.body,
+      fields,
       createdBy: req.user._id,
     });
     await machine.save();
@@ -54,10 +69,25 @@ exports.getMachineById = async (req, res) => {
 // Update machine
 exports.updateMachine = async (req, res) => {
   try {
-    const machine = await Machine.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
+    const fields = req.body.fields?.map(field => {
+      if (field.options && Array.isArray(field.options)) {
+        field.options = field.options.map(optObj => {
+          if (typeof optObj === 'object' && !Array.isArray(optObj) && Object.values(optObj)[0] && Array.isArray(Object.values(optObj)[0])) {
+            return optObj;
+          }
+          return { keyName: Array.isArray(optObj) ? optObj : [optObj] };
+        });
+      }
+      return field;
     });
+    const machine = await Machine.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body, fields },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     if (!machine) {
       return res.status(404).json(response(false, "Machine not found"));
