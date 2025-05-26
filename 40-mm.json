@@ -106,7 +106,7 @@
             "value":{
                 "first": ""
             },
-            "isRequired": true
+            "isRequired": false
         },
         {
             "fieldId": "9",
@@ -264,18 +264,15 @@
         {
             "fieldId": "19",
             "title": "Air ring insert type",
-            "type": "dropdown",
+            "type": "text",
             "valueType": "string",
             "section": 1,
             "value":{
-                "first": "Single leaf"
+                "ABB/ Siemens": "Single leaf",
+                "LHP": "Dual leaf"
             },
-            "options": [
-                { "first": [
-                    { "label": "Single leaf", "value": "Single leaf", "amount": 0 },
-                    { "label": "Dual leaf", "value": "Dual leaf", "amount": 7500 }
-                ] }
-            ],
+            "refreshDynamicField": "13",
+            "isDynamic": true,
             "isRequired": true
         },
         {
@@ -292,23 +289,6 @@
         {
             "fieldId": "21",
             "title": "Centrifugal Air Blower motor make",
-            "type": "dropdown",
-            "valueType": "string",
-            "section": 1,
-            "value":{
-                "first": "ABB/Siemens"
-            },
-            "options": [
-                { "first": [
-                    { "label": "ABB/Siemens", "value": "ABB/Siemens", "amount": 0 },
-                    { "label": "LHP", "value": "LHP", "amount": 0 }
-                ] }
-            ],
-            "isRequired": true
-        },
-        {
-            "fieldId": "22",
-            "title": "Centrifugal Air Blower VFD make",
             "type": "text",
             "valueType": "string",
             "section": 1,
@@ -316,8 +296,25 @@
                 "ABB/Siemens": "ABB/Siemens",
                 "LHP": "LHP"
             },
-            "refreshDynamicField": "21",
+            "refreshDynamicField": "13",
             "isDynamic": true,
+            "isRequired": true
+        },
+        {
+            "fieldId": "22",
+            "title": "Centrifugal Air Blower VFD make",
+            "type": "dropdown",
+            "valueType": "string",
+            "section": 1,
+            "value":{
+                "first": "ABB/ Delta"
+            },
+            "options": [
+                { "first": [
+                    { "label": "ABB/ Delta", "value": "ABB/ Delta", "amount": 0 },
+                    { "label": "Crompton", "value": "Crompton", "amount": 0 }
+                ] }
+            ],
             "isRequired": true
         },
         {
@@ -327,10 +324,10 @@
             "section": 1,
             "valueType": "float",
             "value":{
-                "ABB/Siemens": 12,
-                "LHP": 13
+                "ABB/ Delta": 12,
+                "Crompton": 13
             },
-            "refreshDynamicField": "21",
+            "refreshDynamicField": "22",
             "isDynamic": true,
             "isRequired": true
         },
