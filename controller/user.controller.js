@@ -82,7 +82,8 @@ const createUser = async (req, res) => {
 // Get all users (admin only)
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    // Exclude admin users from the list
+    const users = await User.find({ role: { $ne: "admin" } }).select("-password");
     res.status(200).json(response(true, "Users fetched successfully", users));
   } catch (error) {
     const errorResponse = handleMongoError(error);
@@ -127,9 +128,16 @@ const updateUser = async (req, res) => {
       }
     }
 
+    // If password is being updated, hash it
+    let updateData = { ...req.body };
+    if (updateData.password) {
+      const bcrypt = require("bcryptjs");
+      updateData.password = await bcrypt.hash(updateData.password, 12);
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { $set: { ...req.body } },
+      { $set: updateData },
       { new: true, runValidators: true }
     ).select("-password");
 
