@@ -29,6 +29,7 @@ const dynamicFieldSchema = new mongoose.Schema({
   fieldId: { type: String, required: true },
   title: { type: String, required: true },
   isShowUI: { type: Boolean, default: true },
+  isEditable: { type: Boolean, default: true },
   type: {
     type: String,
     required: true,

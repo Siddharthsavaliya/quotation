@@ -11,7 +11,8 @@
             "value":{
                 "first": "Gas nitriding"
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "2",
@@ -42,21 +43,23 @@
             },
             "refreshDynamicField": "2",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "4",
             "title": "Barrel Heating zones L/D Kw",
-            "type": "number",
+            "type": "text",
             "section": 1,
-            "valueType": "float",
+            "valueType": "string",
             "value":{
-                "26:1": 5.7,
-                "32:1": 8.3
+                "26:1": "5.7",
+                "32:1": "8.3"
             },
             "refreshDynamicField": "2",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "5",
@@ -70,7 +73,8 @@
             },
             "refreshDynamicField": "2",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "6",
@@ -84,7 +88,8 @@
             },
             "refreshDynamicField": "2",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "7",
@@ -95,7 +100,8 @@
             "value":{
                 "first": 40
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "8",
@@ -106,7 +112,8 @@
             "value":{
                 "first": ""
             },
-            "isRequired": false
+            "isRequired": false,
+            "isEditable": true
         },
         {
             "fieldId": "9",
@@ -134,7 +141,8 @@
             "value":{
                 "first": "Gas nitriding"
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "11",
@@ -174,7 +182,9 @@
             "value":{
                 "first": 10
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
+
         },
         {
             "fieldId": "13",
@@ -226,7 +236,8 @@
             "value":{
                 "first": 2
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "16",
@@ -237,7 +248,8 @@
             "value":{
                 "first": 4
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "17",
@@ -248,7 +260,8 @@
             "value":{
                 "first": 1
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "18",
@@ -259,7 +272,8 @@
             "value":{
                 "first": 2.5
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "19",
@@ -273,7 +287,8 @@
             },
             "refreshDynamicField": "13",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "20",
@@ -284,7 +299,8 @@
             "value":{
                 "first": 2.2
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "21",
@@ -293,12 +309,13 @@
             "valueType": "string",
             "section": 1,
             "value":{
-                "ABB/Siemens": "ABB/Siemens",
+                "ABB/ Siemens": "ABB/Siemens",
                 "LHP": "LHP"
             },
             "refreshDynamicField": "13",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "22",
@@ -329,7 +346,8 @@
             },
             "refreshDynamicField": "22",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "24",
@@ -340,7 +358,8 @@
             "value": {
                 "first": 26
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "25",
@@ -351,7 +370,8 @@
             "value": {
                 "first": 9
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "26",
@@ -362,7 +382,8 @@
             "value": {
                 "first": 24
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "27",
@@ -373,7 +394,8 @@
             "value": {
                 "first": 0.75
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "28",
@@ -384,7 +406,8 @@
             "value": {
                 "first": 1
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "29",
@@ -415,7 +438,8 @@
             },
             "refreshDynamicField": "29",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "31",
@@ -429,7 +453,8 @@
             },
             "refreshDynamicField": "29",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "32",
@@ -443,7 +468,8 @@
             },
             "refreshDynamicField": "29",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "33",
@@ -457,7 +483,8 @@
             },
             "refreshDynamicField": "29",
             "isDynamic": true,
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "34",
@@ -471,7 +498,8 @@
             },
             "refreshDynamicField": "29",
             "isDynamic": true,
-            "isRequired": false
+            "isRequired": false,
+            "isEditable": true
         },
         {
             "fieldId": "35",
@@ -482,7 +510,8 @@
             "value": {
                 "first": 11.3
             },
-            "isRequired": false
+            "isRequired": false,
+            "isEditable": true
         },
         {
             "fieldId": "36",
@@ -493,7 +522,8 @@
             "value": {
                 "first": 9
             },
-            "isRequired": false
+            "isRequired": false,
+            "isEditable": true
         },
         {
             "fieldId": "37",
@@ -504,7 +534,8 @@
             "value": {
                 "first": 20.3
             },
-            "isRequired": false
+            "isRequired": false,
+            "isEditable": true
         },
         {
             "fieldId": "38",
@@ -515,7 +546,8 @@
             "value": {
                 "first": ""
             },
-            "isRequired": false
+            "isRequired": false,
+            "isEditable": true
         },
         {
             "fieldId": "39",
@@ -526,7 +558,8 @@
             "value": {
                 "first": 1
             },
-            "isRequired": false
+            "isRequired": false,
+            "isEditable": true
         },
         {
             "fieldId": "40",
@@ -537,7 +570,8 @@
             "value": {
                 "first": 650000
             },
-            "isRequired": false
+            "isRequired": true,
+            "isEditable": false
         },
         {
             "fieldId": "41",
@@ -548,7 +582,8 @@
             "value": {
                 "first": 18
             },
-            "isRequired": true
+            "isRequired": true,
+            "isEditable": false
         },
 
         {
