@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Machine</title>
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: Arial, sans-serif;
+            padding: 40px 0;
+        }
+        .container {
+            background: #fff;
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            padding: 32px 40px 32px 40px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 18px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+        }
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        textarea {
+            min-height: 180px;
+            font-family: monospace;
+        }
+        .btn {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #217dbb;
+        }
+        .instructions {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 18px;
+            margin-top: 30px;
+            border-radius: 6px;
+            font-size: 0.98em;
+        }
+        .error {
+            color: #c0392b;
+            margin-bottom: 10px;
+        }
+        .success {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create New Machine</h1>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error"><%= error %></div>
+        <% } %>
+        <% if (typeof success !== 'undefined' && success) { %>
+            <div class="success"><%= success %></div>
+        <% } %>
+        <form method="POST" action="/create-machine">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="machineJson">Paste Machine JSON</label>
+            <textarea id="machineJson" name="machineJson" placeholder="Paste your machine JSON here..." required></textarea>
+
+            <button class="btn" type="submit">Create Machine</button>
+        </form>
+        <div class="instructions">
+            <h2>How to Prepare Machine JSON</h2>
+            <ul>
+                <li>Start with an object containing <code>name</code>, <code>description</code>, and <code>fields</code> array.</li>
+                <li>Each field should have: <code>fieldId</code>, <code>title</code>, <code>type</code> (<code>text</code>, <code>number</code>, <code>dropdown</code>), <code>section</code>, <code>valueType</code>, <code>value</code>, and optionally <code>options</code> (for dropdowns).</li>
+                <li>For dynamic fields, set <code>isDynamic: true</code> and <code>refreshDynamicField</code> to the controlling field's ID.</li>
+                <li>Use <code>amount</code> in dropdown options to adjust pricing.</li>
+                <li>See <a href="/40-mm.md" target="_blank">40-mm.md</a> for a full example and explanation.</li>
+            </ul>
+            <p><strong>Example Field:</strong></p>
+            <pre><code>{
+  "fieldId": "2",
+  "title": "Screw L/D Ratio type 1",
+  "type": "dropdown",
+  "valueType": "string",
+  "section": 1,
+  "value": { "first": "26:1" },
+  "options": [
+    { "first": [
+      { "label": "26:1", "value": "26:1", "amount": 0 },
+      { "label": "32:1", "value": "32:1", "amount": 75000 }
+    ] }
+  ],
+  "isRequired": true
+}</code></pre>
+        </div>
+    </div>
+</body>
+</html> 

@@ -10,6 +10,8 @@ const machineRoutes = require("./route/machine.route");
 const machineFormRoutes = require("./route/machineForm.route");
 const response = require("./helper/response");
 const path = require("path");
+const fs = require("fs");
+const { Machine } = require("./model/machine.model");
 
 const app = express();
 
@@ -149,6 +151,59 @@ app.use("/api/customers", customerRoutes);
 app.use("/api/quotations", quotationRoutes);
 app.use("/api/machines", machineRoutes);
 app.use("/api/machine-forms", machineFormRoutes);
+
+// Route to render the machine creation form
+app.get("/create-machine", (req, res) => {
+  // Always clear state on page load
+  res.render("createMachine", { error: null, success: null });
+});
+
+// Route to handle machine creation form submission
+app.post("/create-machine", async (req, res) => {
+  const { username, password, machineJson } = req.body;
+  if (username !== "admin" || password !== "admin123") {
+    return res.render("createMachine", { error: "Invalid username or password.", success: null });
+  }
+  let machineData;
+  try {
+    machineData = JSON.parse(machineJson);
+  } catch (e) {
+    return res.render("createMachine", { error: "Invalid JSON format.", success: null });
+  }
+  if (!machineData.name) {
+    return res.render("createMachine", { error: "JSON must have a 'name' property.", success: null });
+  }
+  // Check for duplicate machine name
+  const existing = await Machine.findOne({ name: machineData.name });
+  if (existing) {
+    return res.render("createMachine", { error: `A machine with the name '${machineData.name}' already exists.`, success: null });
+  }
+  // Save the JSON to a file named after the machine (backup)
+  const fileName = machineData.name.replace(/\s+/g, "-").toLowerCase() + ".json";
+  const filePath = path.join(__dirname, fileName);
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(machineData, null, 2));
+  } catch (e) {
+    // Ignore file save error, continue to DB
+  }
+  // Insert into MongoDB
+  try {
+    const adminUser = await User.findOne({ username: "admin" });
+    if (!adminUser) {
+      return res.render("createMachine", { error: "Admin user not found in DB.", success: null });
+    }
+    const machineDoc = {
+      name: machineData.name,
+      description: machineData.description || "",
+      fields: machineData.fields || [],
+      createdBy: adminUser._id
+    };
+    await Machine.create(machineDoc);
+    return res.render("createMachine", { success: `Machine '${machineData.name}' added to database and saved as ${fileName}`, error: null });
+  } catch (e) {
+    return res.render("createMachine", { error: "Failed to add machine to database: " + e.message, success: null });
+  }
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {

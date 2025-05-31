@@ -1,0 +1,876 @@
+{
+  "name": "30MM STD MACHINE",
+  "description": "High-performance extruder",
+  "fields": [
+    {
+      "fieldId": "1",
+      "title": "Barrel surface treatment",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "first": "Gas nitriding"
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "2",
+      "title": "Screw L/D Ratio type 1",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 1,
+      "value": {
+        "first": "26:1"
+      },
+      "options": [
+        {
+          "first": [
+            {
+              "label": "26:1",
+              "value": "26:1",
+              "amount": 0
+            },
+            {
+              "label": "32:1",
+              "value": "32:1",
+              "amount": 75000
+            }
+          ]
+        }
+      ],
+      "isRequired": true
+    },
+    {
+      "fieldId": "3",
+      "title": "Barrel Heating zones",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "26:1": "2",
+        "32:1": "3"
+      },
+      "refreshDynamicField": "2",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "4",
+      "title": "Barrel Heating zones L/D Kw",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "26:1": "5.7",
+        "32:1": "8.3"
+      },
+      "refreshDynamicField": "2",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "5",
+      "title": "Barrel heating zone colling blower as per L/D",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "26:1": "2nd zone",
+        "32:1": "2nd Zone & 3rd Zone"
+      },
+      "refreshDynamicField": "2",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "6",
+      "title": "Barrel heating zone colling blower Kw and phase",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "26:1": "0.5 hp & Single phase 220 volt",
+        "32:1": "2N0. 0.5 hp & Single phase 220 volt"
+      },
+      "refreshDynamicField": "2",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "7",
+      "title": "Screw Diameter mm",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 40
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "8",
+      "title": "Screw L/D Ratio type 2",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "first": ""
+      },
+      "isRequired": false,
+      "isEditable": true
+    },
+    {
+      "fieldId": "9",
+      "title": "Screw design type",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 1,
+      "value": {
+        "first": "Standard"
+      },
+      "options": [
+        {
+          "first": [
+            {
+              "label": "Standard",
+              "value": "Standard",
+              "amount": 0
+            },
+            {
+              "label": "Barrier",
+              "value": "Barrier",
+              "amount": 0
+            }
+          ]
+        }
+      ],
+      "isRequired": true
+    },
+    {
+      "fieldId": "10",
+      "title": "Screw surface treatment",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "first": "Gas nitriding"
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "11",
+      "title": "Screw Output capacity",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 1,
+      "options": [
+        {
+          "Standard": [
+            {
+              "label": "35kg/hr for BIO",
+              "value": "35kg/hr for BIO",
+              "amount": 0
+            },
+            {
+              "label": "37kg/hr for HDPE",
+              "value": "37kg/hr for HDPE",
+              "amount": 0
+            },
+            {
+              "label": "30kg/hr for LLDPE",
+              "value": "30kg/hr for LLDPE",
+              "amount": 0
+            }
+          ]
+        },
+        {
+          "Barrier": [
+            {
+              "label": "40kg/hr for BIO",
+              "value": "40kg/hr for BIO",
+              "amount": 0
+            },
+            {
+              "label": "40kg/hr for HDPE",
+              "value": "40kg/hr for HDPE",
+              "amount": 0
+            },
+            {
+              "label": "35kg/hr for LLDPE",
+              "value": "35kg/hr for LLDPE",
+              "amount": 0
+            },
+            {
+              "label": "42kg/hr for BIO",
+              "value": "42kg/hr for BIO",
+              "amount": 0
+            },
+            {
+              "label": "42kg/hr for HDPE",
+              "value": "42kg/hr for HDPE",
+              "amount": 0
+            },
+            {
+              "label": "37kg/hr for LLDPE",
+              "value": "37kg/hr for LLDPE",
+              "amount": 0
+            }
+          ]
+        }
+      ],
+      "refreshDynamicField": "9",
+      "isDynamic": true,
+      "isRequired": true
+    },
+    {
+      "fieldId": "12",
+      "title": "Main motor HP option 1",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 10
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "13",
+      "title": "Main motor make op1",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 1,
+      "value": {
+        "first": "ABB/ Siemens"
+      },
+      "options": [
+        {
+          "first": [
+            {
+              "label": "ABB/ Siemens",
+              "value": "ABB/ Siemens",
+              "amount": 0
+            },
+            {
+              "label": "LHP",
+              "value": "LHP",
+              "amount": -10000
+            }
+          ]
+        }
+      ],
+      "isRequired": true
+    },
+    {
+      "fieldId": "14",
+      "title": "Die Lip Diameter option",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 1,
+      "options": [
+        {
+          "ABB/ Siemens": [
+            {
+              "label": "HDPE 65mm ( 1.25mm lip Gap )",
+              "value": "HDPE 65mm ( 1.25mm lip Gap )",
+              "amount": 0
+            },
+            {
+              "label": "LLDPE 125mm ( 2.2mm Lip Gap )",
+              "value": "LLDPE 125mm ( 2.2mm Lip Gap )",
+              "amount": 0
+            }
+          ]
+        },
+        {
+          "LHP": [
+            {
+              "label": "HDPE 75mm ( 1.25mm lip Gap )",
+              "value": "HDPE 75mm ( 1.25mm lip Gap )",
+              "amount": 0
+            },
+            {
+              "label": "LLDPE 100mm ( 2.2mm Lip Gap )",
+              "value": "LLDPE 100mm ( 2.2mm Lip Gap )",
+              "amount": 0
+            }
+          ]
+        }
+      ],
+      "refreshDynamicField": "13",
+      "isDynamic": true,
+      "isRequired": true
+    },
+    {
+      "fieldId": "15",
+      "title": "Die head Heating zone",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 2
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "16",
+      "title": "Die head Heating zone Kw",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 4
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "17",
+      "title": "Screen changer Heating zone",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 1
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "18",
+      "title": "Screen changer Heating zone Kw",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 2.5
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "19",
+      "title": "Air ring insert type",
+      "type": "text",
+      "valueType": "string",
+      "section": 1,
+      "value": {
+        "ABB/ Siemens": "Single leaf",
+        "LHP": "Dual leaf"
+      },
+      "refreshDynamicField": "13",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "20",
+      "title": "Centrifugal Air Blower HP",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 2.2
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "21",
+      "title": "Centrifugal Air Blower motor make",
+      "type": "text",
+      "valueType": "string",
+      "section": 1,
+      "value": {
+        "ABB/ Siemens": "ABB/Siemens",
+        "LHP": "LHP"
+      },
+      "refreshDynamicField": "13",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "22",
+      "title": "Centrifugal Air Blower VFD make",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 1,
+      "value": {
+        "first": "ABB/ Delta"
+      },
+      "options": [
+        {
+          "first": [
+            {
+              "label": "ABB/ Delta",
+              "value": "ABB/ Delta",
+              "amount": 0
+            },
+            {
+              "label": "Crompton",
+              "value": "Crompton",
+              "amount": 0
+            }
+          ]
+        }
+      ],
+      "isRequired": true
+    },
+    {
+      "fieldId": "23",
+      "title": "Tower Height feet op.",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "ABB/ Delta": 12,
+        "Crompton": 13
+      },
+      "refreshDynamicField": "22",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "24",
+      "title": "Nip roller width inch op1",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 26
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "25",
+      "title": "Layflat width inch min",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 9
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "26",
+      "title": "Layflat width inch max",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 24
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "27",
+      "title": "Take off motor HP",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 0.75
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "28",
+      "title": "Take off motor VFD",
+      "type": "text",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 1
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "29",
+      "title": "Take off motor VFD make",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 1,
+      "value": {
+        "first": "ABB/ Delta"
+      },
+      "options": [
+        {
+          "first": [
+            {
+              "label": "ABB/ Delta",
+              "value": "ABB/ Delta",
+              "amount": 0
+            },
+            {
+              "label": "Crompton",
+              "value": "Crompton",
+              "amount": 0
+            }
+          ]
+        }
+      ],
+      "isRequired": true
+    },
+    {
+      "fieldId": "30",
+      "title": "Line speed MTR/MIN min & max op1",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "ABB/ Delta": "25-90 MTR/MIN",
+        "Crompton": "15-60 MTR/MIN"
+      },
+      "refreshDynamicField": "29",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "31",
+      "title": "Film thickness min & max op1",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "ABB/ Delta": "7-30 microns",
+        "Crompton": "7-40 microns"
+      },
+      "refreshDynamicField": "29",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "32",
+      "title": "Ratio for worm gear box op1",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "ABB/ Delta": 5,
+        "Crompton": 7.5
+      },
+      "refreshDynamicField": "29",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "33",
+      "title": "Collapsing frame op1",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "ABB/ Delta": "Wooden slate",
+        "Crompton": "Delrin rings"
+      },
+      "refreshDynamicField": "29",
+      "isDynamic": true,
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "34",
+      "title": "Guzzet ldakh op1",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "ABB/ Delta": "",
+        "Crompton": "3 inch (4500)"
+      },
+      "refreshDynamicField": "29",
+      "isDynamic": true,
+      "isRequired": false,
+      "isEditable": true
+    },
+    {
+      "fieldId": "35",
+      "title": "Total Heating Load Kw",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 11.3
+      },
+      "isRequired": false,
+      "isEditable": true
+    },
+    {
+      "fieldId": "36",
+      "title": "Total Motor Load Kw",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 9
+      },
+      "isRequired": false,
+      "isEditable": true
+    },
+    {
+      "fieldId": "37",
+      "title": "Total Connecting Load Kw",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 20.3
+      },
+      "isRequired": false,
+      "isEditable": true
+    },
+    {
+      "fieldId": "38",
+      "title": "Total Connecting Load with all accessories Kw",
+      "type": "text",
+      "section": 1,
+      "valueType": "string",
+      "value": {
+        "first": ""
+      },
+      "isRequired": false,
+      "isEditable": true
+    },
+    {
+      "fieldId": "39",
+      "title": "Water Temp. zone",
+      "type": "number",
+      "section": 1,
+      "valueType": "float",
+      "value": {
+        "first": 1
+      },
+      "isRequired": false,
+      "isEditable": true
+    },
+    {
+      "fieldId": "40",
+      "title": "PRICE (INR)",
+      "type": "number",
+      "section": 2,
+      "valueType": "float",
+      "value": {
+        "first": 650000
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "41",
+      "title": "GST TAX",
+      "type": "number",
+      "section": 2,
+      "valueType": "float",
+      "value": {
+        "first": 18
+      },
+      "isRequired": true,
+      "isEditable": false
+    },
+    {
+      "fieldId": "42",
+      "title": "Additional accessories",
+      "type": "dropdown",
+      "valueType": "string",
+      "section": 2,
+      "options": [
+        {
+          "first": [
+            {
+              "label": "Embossing unit",
+              "value": "Embossing unit",
+              "amount": 20000
+            },
+            {
+              "label": "Air ring cage type basket",
+              "value": "Air ring cage type basket",
+              "amount": 20000
+            },
+            {
+              "label": "Air sensor",
+              "value": "Air sensor",
+              "amount": 7500
+            },
+            {
+              "label": "Hopper Magnet",
+              "value": "Hopper Magnet",
+              "amount": 2000
+            },
+            {
+              "label": "Full Page Rotogravure Printing Machine",
+              "value": "Full Page Rotogravure Printing Machine",
+              "amount": 1165000
+            },
+            {
+              "label": "Full Page Rotogravure Printing Machine Kw",
+              "value": "Full Page Rotogravure Printing Machine Kw",
+              "amount": 0
+            },
+            {
+              "label": "Rotating Die",
+              "value": "Rotating Die",
+              "amount": 175000
+            },
+            {
+              "label": "Rotating Die Kw",
+              "value": "Rotating Die Kw",
+              "amount": 2
+            },
+            {
+              "label": "Rotating Die motor kw",
+              "value": "Rotating Die motor kw",
+              "amount": 0.37
+            },
+            {
+              "label": "Hopper Loader Dryer",
+              "value": "Hopper Loader Dryer",
+              "amount": 110000
+            },
+            {
+              "label": "Hopper Loader Dryer Kw",
+              "value": "Hopper Loader Dryer Kw",
+              "amount": 3
+            },
+            {
+              "label": "Punching Machine",
+              "value": "Punching Machine",
+              "amount": 95000
+            },
+            {
+              "label": "Punching Machine Kw",
+              "value": "Punching Machine Kw",
+              "amount": 1.5
+            },
+            {
+              "label": "Corona Treatment 26\"",
+              "value": "Corona Treatment 26\"",
+              "amount": 65000
+            },
+            {
+              "label": "Corona treater Kw",
+              "value": "Corona treater Kw",
+              "amount": 1.5
+            },
+            {
+              "label": "Mini Roto Printing Machine",
+              "value": "Mini Roto Printing Machine",
+              "amount": 30000
+            },
+            {
+              "label": "Mini Flexo Printing Machine",
+              "value": "Mini Flexo Printing Machine",
+              "amount": 30000
+            },
+            {
+              "label": "Extra Top Punch for cavity",
+              "value": "Extra Top Punch for cavity",
+              "amount": 25000
+            },
+            {
+              "label": "Extra insert plate for extra die top punch",
+              "value": "Extra insert plate for extra die top punch",
+              "amount": 5000
+            }
+          ]
+        }
+      ],
+      "isRequired": false
+    },
+    {
+      "fieldId": "43",
+      "title": "ADVANCE",
+      "type": "text",
+      "section": 2,
+      "valueType": "string",
+      "value": {
+        "first": "10%"
+      },
+      "isRequired": true
+    },
+    {
+      "fieldId": "44",
+      "title": "CANCELLLATION",
+      "type": "text",
+      "section": 2,
+      "valueType": "string",
+      "value": {
+        "first": "30 days notice required"
+      },
+      "isRequired": true
+    },
+    {
+      "fieldId": "45",
+      "title": "DELIVERY",
+      "type": "text",
+      "section": 2,
+      "valueType": "string",
+      "value": {
+        "first": "8-10 weeks from order confirmation"
+      },
+      "isRequired": true
+    },
+    {
+      "fieldId": "46",
+      "title": "INSURANCE",
+      "type": "text",
+      "section": 2,
+      "valueType": "string",
+      "value": {
+        "first": "1 year comprehensive insurance included"
+      },
+      "isRequired": true
+    },
+    {
+      "fieldId": "47",
+      "title": "WARRANTY",
+      "type": "text",
+      "section": 2,
+      "valueType": "string",
+      "value": {
+        "first": "1 year standard warranty"
+      },
+      "isRequired": true
+    },
+    {
+      "fieldId": "48",
+      "title": "VALIDITY",
+      "type": "text",
+      "section": 2,
+      "valueType": "string",
+      "value": {
+        "first": "30 days from quote date"
+      },
+      "isRequired": true
+    },
+    {
+      "fieldId": "49",
+      "title": "discount",
+      "type": "number",
+      "section": 2,
+      "valueType": "float",
+      "value": {
+        "first": 0
+      },
+      "isRequired": true
+    }
+  ]
+}
