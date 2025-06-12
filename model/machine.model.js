@@ -62,6 +62,7 @@ const dynamicFieldSchema = new mongoose.Schema({
   description: String,
   order: { type: Number, default: 0 },
   subOrder: { type: Number, default: 0 },
+  qFieldMain: { type: Number, default: 1 },
 });
 
 // Schema for custom fields
