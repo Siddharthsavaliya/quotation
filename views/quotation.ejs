@@ -15,23 +15,75 @@
 
         @page {
             size: A4;
-            margin: 0;
+            margin: 10mm 15mm 10mm 15mm; /* reduced top, right, bottom, left */
         }
 
         body {
             background: #fff;
             width: 210mm;
-            height: 297mm;
+            min-height: 297mm;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 28mm;
+            width: 100%;
+            z-index: 1000;
+            background: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 8mm 15mm 0 0;
+        }
+
+        .header-fixed img {
+            width: 140px;
+            height: auto;
+        }
+
+        .footer-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 22mm;
+            width: 100%;
+            z-index: 1000;
+            background: #fff;
+            text-align: center;
+            padding: 0 15mm 2mm 15mm;
+            box-sizing: border-box;
+        }
+
+        .footer-address {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 2px;
+        }
+
+        .footer-tagline {
+            color: #011BB6;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 4px;
+            margin-bottom: 0;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
         .page {
-            position: relative;
-            width: 210mm;
-            min-height: 297mm;
-            padding: 15mm;
+            width: 100%;
+            min-height: 230mm;
+            box-sizing: border-box;
             page-break-after: always;
-            background: white;
+            padding-top: 40mm; /* header height + extra gap to avoid cut-off */
+            padding-bottom: 24mm; /* footer height + some gap */
         }
 
         .page:last-child {
@@ -52,7 +104,7 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 25px;
-            border-bottom: 2px solid #000066;
+            border-bottom: 2px solid #011BB6;
             padding-bottom: 15px;
         }
 
@@ -88,8 +140,8 @@
         .quotation-to h3 {
             margin-bottom: 10px;
             font-size: 15px;
-            color: #000066;
-            border-bottom: 2px solid #000066;
+            color: #011BB6;
+            border-bottom: 2px solid #011BB6;
             padding-bottom: 5px;
             display: inline-block;
         }
@@ -137,7 +189,7 @@
         }
 
         .blue-header {
-            background-color: #000066;
+            background-color: #011BB6;
             color: white;
             padding: 12px 15px;
             margin: 0 0 15px 0;
@@ -176,7 +228,7 @@
             background-color: #f5f5f5;
             font-weight: bold;
             text-align: left;
-            color: #000066;
+            color: #011BB6;
         }
 
         .terms-content {
@@ -197,13 +249,13 @@
             right: 15mm;
             text-align: center;
             padding-top: 10px;
-            border-top: 2px solid #000066;
+            border-top: 2px solid #011BB6;
             background: white;
         }
 
         .footer p {
             margin: 2px 0;
-            color: #000066;
+            color: #011BB6;
             font-size: 11px;
             line-height: 1.4;
         }
@@ -211,7 +263,7 @@
         .section-title {
             font-size: 15px;
             font-weight: bold;
-            color: #000066;
+            color: #011BB6;
             padding-bottom: 8px;
             margin-bottom: 10px;
             border-bottom: 1px solid #ddd;
@@ -223,7 +275,7 @@
         }
 
         .financial-table tr:last-child td {
-            border-top: 2px solid #000066;
+            border-top: 2px solid #011BB6;
         }
 
         .machine-details {
@@ -251,11 +303,11 @@
             background: #f8f9fa;
             padding: 15px;
             border-radius: 4px;
-            border-top: 2px solid #000066;
+            border-top: 2px solid #011BB6;
         }
 
         .total-summary .section-title {
-            color: #000066;
+            color: #011BB6;
             margin-top: 0;
         }
 
@@ -274,7 +326,7 @@
         .summary-table tr:last-child {
             font-weight: bold;
             font-size: 14px;
-            border-top: 2px solid #000066;
+            border-top: 2px solid #011BB6;
         }
 
         .summary-table tr:last-child td {
@@ -335,214 +387,175 @@
 </head>
 
 <body>
+    <!-- Fixed Header -->
+    <div class="header-fixed">
+        <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech">
+    </div>
+    <!-- Fixed Footer -->
+    <div class="footer-fixed">
+        <div class="footer-address">
+            984, Makarpura GIDC, Vadodara – 390010. Gujarat, India.<br>
+            Website: <a href='https://www.ashokextrusiontech.com' style='color:#888; text-decoration:underline;'>www.ashokextrusiontech.com</a> |
+            Email: <a href='mailto:info@ashokextrusiontech.com' style='color:#888; text-decoration:underline;'>info@ashokextrusiontech.com</a>
+        </div>
+        <div class="footer-tagline">
+            Superior Quality Film with unrivalled Support
+        </div>
+    </div>
     <!-- First Page -->
     <div class="page">
-        <div class="header">
-            <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech" class="logo">
-            <div class="quotation-info">
-                <p><strong>Quotation No:</strong> #<%= formNumber %>
-                </p>
-                <p><strong>Date:</strong>
-                    <%= new Date().toLocaleDateString('en-GB', { day: '2-digit' , month: 'short' , year: '2-digit' }) %>
-                </p>
+        <div style="flex:1;">
+            <div style="margin-top:100px; margin-bottom:0;">
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Date: <span style="font-weight:normal; color:#222;"> <%= (new Date()).toLocaleDateString('en-GB').split('/').join('-') %></span></p>
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Quotation No.: <span style="font-weight:normal; color:#222;"> <%= formNumber %></span></p>
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Kind Attn.:</p>
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Sub.: Technical and Financial Details for Extruder Blown Film Plant</p>
+                <p style="color:#011BB6; font-weight:bold; font-style:italic; margin-bottom:6px; font-size:16px; line-height:1.3;">Model: <%= machines[0].machine.name %></p>
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">To.</p>
+                <p style="margin-top:8px; color:#222; margin-bottom:18px; font-size:15px; line-height:1.6;">Apropos to your requirement in personal discussion regarding Blown Film Extruder Machine, we thank you for giving us the opportunity to work with you for supplying you the machine as per your requirement.</p>
             </div>
-        </div>
-
-        <div class="sales-person">
-            <% if (typeof submittedBy !=='undefined' && submittedBy) { %>
-                <p><strong>Sales Person:</strong>
-                    <%= submittedBy.username || 'N/A' %>
-                </p>
-                <p>
-                    <%= submittedBy.phone || '' %>
-                </p>
-                <% } %>
-        </div>
-
-        <div class="quotation-to">
-            <h3>QUOTATION TO:</h3>
-            <p>
-                <%= customer.companyName %>
-            </p>
-            <p>
-                <%= customer.phone %>
-            </p>
-        </div>
-
-        <div class="subject-line">
-            <p><strong>Subject:</strong> Technical & Financial Proposal for <%= machines[0].machine.name %>
-            </p>
-            <p>Dear Sir,</p>
-            <p>We are pleased to submit our proposal for <%= machines[0].machine.name %>. Please find the detailed
-                    specifications and terms below:</p>
-        </div>
-
-        <table class="annexure-table">
-            <tr>
-                <td>Annexure - 1</td>
-                <td>Technical Proposal</td>
-                <td style="text-align: right;">Page 2</td>
-            </tr>
-            <tr>
-                <td>Annexure - 2</td>
-                <td>Financial Proposal</td>
-                <td style="text-align: right;">Page 3</td>
-            </tr>
-            <tr>
-                <td>Annexure - 3</td>
-                <td>Terms & Conditions</td>
-                <td style="text-align: right;">Page 4</td>
-            </tr>
-        </table>
-        <div class="page-number">Page 1 of <%= 3 + machines.length %>
+            <div style="margin-top:10px; margin-bottom:18px;">
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:8px; font-size:16px; line-height:1.3;">Key Benefits of business with Ashok Extrusion Tech Private Limited,</p>
+                <ul style="margin-left:20px; margin-bottom:10px; color:#222; font-size:15px; line-height:1.6;">
+                    <li style="margin-bottom:4px;">Bankable Project.</li>
+                    <li style="margin-bottom:4px;">Controlled BOM with certified Components.</li>
+                    <li style="margin-bottom:4px;">Total Solution with Installation and service.</li>
+                    <li style="margin-bottom:4px;">Highest Efficiency of machine with certified components with 1 Year of Upfront warranty.</li>
+                </ul>
+            </div>
+            <div style="margin-bottom:18px; color:#222; font-size:15px; line-height:1.6;">We have enclosed the following documents for your kind perusal:</div>
+            <table style="width:100%; border-collapse:collapse; margin-top:10px; margin-bottom:30px; font-size:15px;">
+                <tr style="background:#011BB6; color:#fff; font-weight:bold;">
+                    <td style="border:1px solid #888; padding:8px; width:10%; text-align:center;">Sr. No.</td>
+                    <td style="border:1px solid #888; padding:8px; width:60%; text-align:center;">Description</td>
+                    <td style="border:1px solid #888; padding:8px; width:30%; text-align:center;">Page No.</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #888; padding:8px; text-align:center;">1</td>
+                    <td style="border:1px solid #888; padding:8px; font-weight:bold;">Section 1: Technical Specifications</td>
+                    <td style="border:1px solid #888; padding:8px;"></td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #888; padding:8px; text-align:center;">2</td>
+                    <td style="border:1px solid #888; padding:8px; font-weight:bold;">Section 2: Financial Quote</td>
+                    <td style="border:1px solid #888; padding:8px;"></td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #888; padding:8px; text-align:center;">3.</td>
+                    <td style="border:1px solid #888; padding:8px; font-weight:bold;">Section 3: Terms and Conditions</td>
+                    <td style="border:1px solid #888; padding:8px;"></td>
+                </tr>
+            </table>
+            <div style="margin-top:32px;"></div>
+            <div style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:15px; line-height:1.5; padding:4px 0 4px 8px; width:max-content;">Please feel free for any further discussions.</div>
+            <div style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:15px; line-height:1.5; padding:4px 0 4px 8px; width:max-content;">Thank you and with best regards,</div>
+            <div style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:15px; line-height:1.5; padding:4px 0 4px 8px; width:max-content;">Ashok Extrusion Tech Private Limited.</div>
         </div>
     </div>
 
     <!-- Technical Proposal Pages -->
     <% machines.forEach((machineItem, machineIndex)=> { %>
         <div class="page">
-            <div class="blue-header">
-                <h2>ANNEXURE - 1<%= machineIndex> 0 ? `-${machineIndex+1}` : '' %></h2>
+            <div style="font-size:22px; color:#011BB6; font-weight:bold; margin-bottom:18px; margin-top:100px;">
+                Section 1: Technical Specifications for <span style="font-style:italic; font-weight:normal;"><%= machineItem.machine.name %></span>
             </div>
-            <div class="technical-content">
-                <div class="machine-section">
-                    <div class="section-title">Technical Proposal for <%= machineItem.machine.name %>
-                    </div>
-                    <table class="technical-table">
-                        <thead>
-                            <tr>
-                                <th width="10%">No.</th>
-                                <th width="45%">Item</th>
-                                <th width="45%">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% if (machineItem.fieldValues && machineItem.fieldValues.length) {
-                                machineItem.fieldValues.forEach((fieldValue, index)=> {
-                                if (fieldValue && fieldValue.fieldId && fieldValue.value) {
-                                const field = machineItem.machine.fields.find(f => f._id.toString() ===
-                                fieldValue.fieldId.toString());
-                                if (field && fieldValue.value && fieldValue.value.trim() !== '') {
-                                // Skip fields with specific titles
-                                const skipTitles = ['VALIDITY', 'WARRANTY', 'NOTES', 'INSURANCE',
-                                'DELIVERY', 'CANCELLLATION', 'ADVANCE', 'GST TAX', 'PRICE (INR)', 'ADDITIONAL ACCESSORIES', 'Additional accessories', 'DISCOUNT','discount'];
-                                if (!skipTitles.includes(field.title.toUpperCase())) {
-                                %>
-                                <tr>
-                                    <td>
-                                        <%= index + 1 %>
-                                    </td>
-                                    <td>
-                                        <%= field.title %>
-                                    </td>
-                                    <td>
-                                        <%= fieldValue.value %>
-                                    </td>
-                                </tr>
-                                <% } } } }); } %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="page-number">Page <%= 2 + machineIndex %> of <%= 3 + machines.length %>
-            </div>
+            <% 
+            // 1. Filter only section: 1 fields
+            const mainFields = machineItem.machine.fields.filter(f => f.section === 1);
+            // 2. Group by integer part of qFieldMain
+            const sectionGroups = {};
+            mainFields.forEach(field => {
+                const mainSection = Math.floor(field.qFieldMain);
+                if (!sectionGroups[mainSection]) sectionGroups[mainSection] = [];
+                sectionGroups[mainSection].push(field);
+            });
+            const sortedMainSections = Object.keys(sectionGroups).sort((a, b) => parseInt(a) - parseInt(b));
+            %>
+            <% sortedMainSections.forEach(mainSection => { 
+                const mainField = sectionGroups[mainSection].find(f => f.qFieldMain == mainSection);
+                const mainFieldValueObj = mainField ? machineItem.fieldValues.find(fv => fv.fieldId.toString() === mainField._id.toString()) : null;
+                const mainFieldValue = mainFieldValueObj && mainFieldValueObj.value ? mainFieldValueObj.value : (mainField ? (mainField.description || '') : '');
+                const subFields = sectionGroups[mainSection].filter(f => f.qFieldMain != mainSection);
+            %>
+            <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
+                <tr style="background:#011BB6; color:#fff; border:1px solid #011BB6;">
+                    <td style="width:10%; font-weight:bold; font-size:18px; text-align:center; padding:10px 6px; border:1px solid #011BB6;"> <%= mainSection %> </td>
+                    <td style="width:35%; font-weight:bold; font-size:17px; padding:10px 6px; text-transform:uppercase; border:1px solid #011BB6;"> <%= mainField ? mainField.title : '' %> </td>
+                    <td style="font-weight:bold; font-size:15px; padding:10px 6px; border:1px solid #011BB6;"> <%= mainFieldValue %> </td>
+                </tr>
+                <% subFields.forEach(subField => {
+                    const fieldValue = machineItem.fieldValues.find(fv => fv.fieldId.toString() === subField._id.toString());
+                    if (fieldValue && fieldValue.value && fieldValue.value.toString().trim() !== '') {
+                %>
+                <tr style="background:#fff; color:#011BB6; border:1px solid #011BB6;">
+                    <td style="text-align:center; font-weight:bold; padding:8px 6px; border:1px solid #011BB6;"> <%= subField.qFieldMain %> </td>
+                    <td style="font-weight:bold; padding:8px 6px; border:1px solid #011BB6;"> <%= subField.title %> </td>
+                    <td style="padding:8px 6px; border:1px solid #011BB6;"> <%= fieldValue.value %> </td>
+                </tr>
+                <% } }); %>
+            </table>
+            <% }); %>
         </div>
-        <% }) %>
+    <% }) %>
 
-            <!-- Financial Proposal Page -->
-            <div class="page">
-                <div class="blue-header">
-                    <h2>ANNEXURE - <%= 1 + machines.length + 1 %>
-                    </h2>
-                </div>
+    <!-- Financial Proposal Page -->
+    <div class="page">
+        <div style="font-size:22px; color:#011BB6; font-weight:bold; margin-bottom:18px; margin-top:100px; display:inline-block; border-bottom: 4px solid #011BB6; line-height:1.1; padding-bottom:2px;">
+            Section 2: Financial Quote
+        </div>
+        <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
+            <tr style="background:#011BB6; color:#fff; border:1px solid #011BB6;">
+                <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">SR. NO.</td>
+                <td style="width:50%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">DESCRIPTION</td>
+                <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">QTY</td>
+                <td style="width:16%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">RATE</td>
+                <td style="width:17%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">AMOUNT</td>
+            </tr>
+            <% 
+            // Prepare up to 4 items for the table
+            let items = [];
+            machines.forEach((machineItem, idx) => {
+                items.push({
+                    sr: idx+1,
+                    desc: machineItem.machine.name,
+                    qty: 1,
+                    rate: machineItem.totalPrice ? machineItem.totalPrice.toLocaleString() : '',
+                    amount: machineItem.finalTotal ? machineItem.finalTotal.toLocaleString() : ''
+                });
+            });
+            while(items.length < 4) items.push({sr: items.length+1, desc: '', qty: '', rate: '', amount: ''});
+            let totalQty = items.reduce((sum, i) => sum + (parseInt(i.qty) || 0), 0);
+            let totalAmount = items.reduce((sum, i) => sum + (parseInt(i.amount.replace(/,/g, '')) || 0), 0);
+            %>
+            <% items.forEach((item, idx) => { %>
+            <tr style="border:1px solid #011BB6; color:#011BB6;">
+                <td style="text-align:center; font-weight:bold; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.sr %></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.desc %></td>
+                <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.qty %></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.rate %></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.amount %></td>
+            </tr>
+            <% }); %>
+            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
+                <td colspan="2" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">TOTAL</td>
+                <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= totalQty %></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;"></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= totalAmount ? totalAmount.toLocaleString() : '' %></td>
+            </tr>
+        </table>
+    </div>
 
-                <div class="machine-details">
-                    <div class="section-title">Financial Proposal</div>
+    <!-- Terms & Conditions Page -->
+    <div class="page">
+        <div class="blue-header">
+            <h2>ANNEXURE - <%= 1 + machines.length + 2 %> TERMS & CONDITIONS</h2>
+        </div>
 
-                    <% machines.forEach((machineItem, index)=> { %>
-                        <div class="machine-section">
-                            <table class="financial-table">
-                                <tbody>
-                                    <tr>
-                                        <td width="60%"><strong>Machine Name</strong></td>
-                                        <td width="40%">
-                                            <%= machineItem.machine.name %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rate</td>
-                                        <td>₹<%= machineItem.totalPrice.toLocaleString() %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>GST (<%= machineItem.gstPercentage %>%)</td>
-                                        <td>₹<%= machineItem.gstAmount.toLocaleString() %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Discount</td>
-                                        <td>₹<%= machineItem.discount.toLocaleString() %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Total</strong></td>
-                                        <td><strong>₹<%= machineItem.finalTotal.toLocaleString() %></strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <% }) %>
+        <div class="terms-content">
+            <%= terms %>
+        </div>
 
-                            <div class="total-summary">
-                                <div class="section-title">Total Summary</div>
-                                <table class="summary-table">
-                                    <tbody>
-                                        <tr>
-                                            <td width="60%">Total Base Price</td>
-                                            <td width="40%">₹<%= machines.reduce((sum, m)=> sum + m.totalPrice,
-                                                    0).toLocaleString() %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total GST</td>
-                                            <td>₹<%= machines.reduce((sum, m)=> sum + m.gstAmount, 0).toLocaleString()
-                                                    %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Discount</td>
-                                            <td>₹<%= machines.reduce((sum, m)=> sum + m.discount, 0).toLocaleString() %>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Final Total</td>
-                                            <td>₹<%= machines.reduce((sum, m)=> sum + m.finalTotal, 0).toLocaleString()
-                                                    %></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                </div>
-                <div class="page-number">Page <%= 2 + machines.length %> of <%= 3 + machines.length %>
-                </div>
-            </div>
-
-            <!-- Terms & Conditions Page -->
-            <div class="page">
-                <div class="blue-header">
-                    <h2>ANNEXURE - <%= 1 + machines.length + 2 %> TERMS & CONDITIONS</h2>
-                </div>
-
-                <div class="terms-content">
-                    <%= terms %>
-                </div>
-
-                <div class="footer">
-                    <p><strong>Ashok Extrusiontech PVT LTD</strong></p>
-                    <p>984, Gokul Nagar, Makarpura GIDC, Makarpura, Vadodara, Gujarat 390010</p>
-                    <p>info@ashokextrusiontech.com - www.ashokextrusiontech.com</p>
-                </div>
-                <div class="page-number">Page <%= 3 + machines.length %> of <%= 3 + machines.length %>
-                </div>
-            </div>
+    </div>
 </body>
 
 </html>
