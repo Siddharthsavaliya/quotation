@@ -340,6 +340,19 @@
             margin-bottom: 20px;
         }
 
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 70vw;
+            min-width: 600px;
+            max-width: 900px;
+            opacity: 0.07;
+            z-index: 0;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            pointer-events: none;
+        }
+
         @media print {
             body {
                 width: 210mm;
@@ -382,11 +395,26 @@
             .page:last-child .page-number {
                 bottom: 35mm;
             }
+
+            .watermark {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                width: 70vw;
+                min-width: 600px;
+                max-width: 900px;
+                opacity: 0.07;
+                z-index: 0;
+                transform: translate(-50%, -50%) rotate(-25deg);
+                pointer-events: none;
+            }
         }
     </style>
 </head>
 
 <body>
+    <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" class="watermark" alt="Watermark" />
+
     <!-- Fixed Header -->
     <div class="header-fixed">
         <img src="https://ashokextrusiontech.com/images/Ashok-blue-web.png" alt="Ashok Extrusion Tech">
@@ -547,14 +575,91 @@
 
     <!-- Terms & Conditions Page -->
     <div class="page">
-        <div class="blue-header">
-            <h2>ANNEXURE - <%= 1 + machines.length + 2 %> TERMS & CONDITIONS</h2>
+        <div style="font-size:22px; color:#011BB6; font-weight:bold; margin-bottom:18px; margin-top:100px; display:inline-block; border-bottom: 4px solid #011BB6; line-height:1.1; padding-bottom:2px;">
+            Section 3: Terms & Conditions
         </div>
-
-        <div class="terms-content">
-            <%= terms %>
+        <div style="margin-top:18px;">
+            <div style="color:#011BB6; font-weight:bold; font-size:18px; margin-bottom:8px;">Schedule 1:</div>
+            <div style="font-weight:bold; margin-bottom:8px;color:#011BB6; ">(Commercial Terms & Condition for Supply)</div>
+            <div style="margin-bottom:14px; color:#011BB6;">The acceptance of all orders for execution by us shall always be subject to the following terms and conditions. Unless otherwise specifically agreed upon by us.</div>
+            <ol style="margin-left:18px; color:#011BB6; font-weight:bold;">
+                <li>Price
+                    <ol type="a" style="margin-left:20px; color:#011BB6; font-weight:normal;">
+                        <li>All the prices are excluding taxes and transportation.</li>
+                        <li>40% advance at the time of confirmation of the order. And rest 60% before dispatch after the trial of the machine is done.</li>
+                    </ol>
+                </li>
+                <li>Taxation & Duties
+                    <ol type="a" style="margin-left:20px; color:#011BB6; font-weight:normal;">
+                        <li>All the taxes and duties are applicable as per the law.</li>
+                    </ol>
+                </li>
+                <li>Delivery
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">Delivery will be done within 60 days from the date of receipt of advance. Delivery will be counted from the date of receipt of final techno-commercially clear order and receipt of advance whichever is later. We do not accept liability for any alleged direct or indirect loss occasioned by delay in delivery nor shall such delay be the ground refusal to accept delivery.</div>
+                </li>
+                <li>Cancellation
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">Order once placed cannot be cancelled without our prior consent in writing and on the express condition that all expense incurred till the time of cancellation will be reimbursed by the purchaser. Our decision in the matter will be final & binding. The amount of advance received will be adjusted towards such costs and deficits if any will be charged to the customer.</div>
+                </li>
+                <li>Inspection
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">Material can be inspected at our works prior to dispatch. Intention of the purchaser to inspect prior to dispatch must be specified in his purchase order so that inspection call notice can be given by Ashok Extrusion Tech Pvt. Ltd. on readiness of material time. If it is not specified in purchase order, Ashok Extrusion will treat the same as a waiver of inspection. Normally 5 days' notice period will be given to the purchaser to carry out inspection failing which Ashok Extrusion will make shipment without Purchaser's inspection.</div>
+                </li>
+                <li>Guarantee & Warrantee
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">The machine warranty shall be for 12 months from the date of dispatch. The actual guarantee or warrantees of all components of the plant are warranted as actual from the original supply vendor will directly forwarded to client. The Plant Machinery contains electronics parts, to be operated in SOC (Standard Operating Conditions), defaulting such may result in withdrawal of warranty or termination of service contract.</div>
+                </li>
+                <li>Force Majeure
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">If at any stage during the period of the contracts, the performance of any obligations under the contract is prevented or delayed wholly or partly be reasons of war, hostility, fire, floods, lightning, epidemics, sabotages, quarantine restrictions or other acts of God, Government or Law (herein after referred to as eventuates) then a notice of the happening of any such eventuality will be given within 7 days from the date of occurrence of any such eventuality. In such case neither party shall, by reasons of such eventuality, be entitled to terminate this contract, nor shall any claim be made for damages against the order in respect of such nonperformance or delay and the performance and deliveries of the contract will be resumed as soon as practicable after such eventuality has come to an end or ceased to exist.</div>
+                </li>
+                <li>Jurisdictions:
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">All order placed on Ashok Extrusion Tech shall be subject of Jurisdiction of Vadodara Courts only.</div>
+                </li>
+                <li>Arbitration:
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">If at any question, dispute or difference whatsoever shall arise between Ashok Extrusion Tech Pvt Ltd. and the purchaser upon or in relation to, or in connection with the purchase order/contract the same may be referred to arbitration as per Indian Arbitration Act. The jurisdiction and venue of arbitration shall be Vadodara only.</div>
+                </li>
+            </ol>
+            <div style="color:#011BB6; font-weight:bold; font-size:18px; margin-top:24px; margin-bottom:8px;">Schedule 2:</div>
+            <div style="font-weight:bold; margin-bottom:8px;">(Erection & Commissioning)</div>
+            <div style="margin-bottom:14px; color:#011BB6;">Our Guarantee of the equipment is based on the assumption that the erection and commissioning of the equipment supplied by us is done by our team or under the supervision of our erection engineers/ foreman. The erection and commissioning will be done by us on the following Terms and Conditions:</div>
+            <ol style="margin-left:18px; color:#011BB6; font-weight:bold;">
+                <li>Erection Personnel
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">We will depute the erection personal to supervise the erection and commissioning of the equipment. The number and the skill of personal will be decided by us after the finalization of the order.</div>
+                </li>
+                <li>Facilities to be provided our erection staff
+                    <ol type="a" style="margin-left:20px; color:#011BB6; font-weight:normal;">
+                        <li>Free nominal medical facility, if required.</li>
+                        <li>All the local conveyance and local transportation is to be provided to our staff.</li>
+                    </ol>
+                </li>
+                <li>Facility to be provided by the customer to our erection staff at work site
+                    <ol type="a" style="margin-left:20px; color:#011BB6; font-weight:normal;">
+                        <li>Transportation and storage of equipment near the installation space.</li>
+                        <li>Limited use of the workshop facilities as available at client's workshop for carrying out any minor changes or works as required during the course of erection work.</li>
+                    </ol>
+                </li>
+                <li>Care in case of Emergency
+                    <div style="color:#011BB6; font-weight:normal; margin-left:20px;">In case of serious illness, accident or death immediate information by the customer to the supplier is necessary so that all necessary steps can be taken.</div>
+                </li>
+                <li>Commissioning as well as Acceptance of the plant and training of the operation personnel
+                    <ol type="a" style="margin-left:20px; color:#011BB6; font-weight:normal;">
+                        <li>During the setting into operation of the plant, the normal operational personnel should be made available to our erection engineers and they should work under his instruction so that they get trained during this process.</li>
+                        <li>After the commissioning of the plant is over, a taking-over certificate is issued in 4 copies, determining the date of the beginning and ending of the period. The customer and supplier will get two copies each.</li>
+                    </ol>
+                </li>
+                <li>Customer's Scope
+                    <ol type="a" style="margin-left:20px; color:#011BB6; font-weight:normal;">
+                        <li>Foundation (Flat Flooring) and civil work from customer side.</li>
+                        <li>Unloading, shifting and foundation of machine</li>
+                        <li>Power supply to cover full installed load, 415 V+ (-5)%, 3 phase, 50 Hz, cables laid up to control panel. Voltage stabilizer required when power supply is fluctuating outside the range of required power supply.</li>
+                        <li>Coils and copper wire for earthing.</li>
+                        <li>Air compressor and FRL unit and Water Tank of required capacity based on machine capacity.</li>
+                        <li>Water connection or Cooling Tower Connection as per requirement based on machine capacity.</li>
+                        <li>Pipe work from and to Machine for compressed air and water.</li>
+                        <li>All raw material like granules, etc are to be supplied by client before the trail run at our factory.</li>
+                    </ol>
+                </li>
+            </ol>
+            <div style="color:#011BB6; font-weight:bold; margin-top:24px;">Thanks and Best Regards,</div>
+            <div style="color:#011BB6; font-weight:bold;">Ashok Extrusion Tech Private Limited.</div>
         </div>
-
     </div>
 </body>
 
