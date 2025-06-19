@@ -25,4 +25,7 @@ router.get("/:id/pdf", quotationController.generatePDF);
 // Generate and download PDF quotation
 router.get("/download/:formId", quotationController.generateQuotationPDF);
 
+// View quotation form
+router.get("/view/:formId", quotationController.viewQuotationForm);
+
 module.exports = router;

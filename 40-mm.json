@@ -601,7 +601,7 @@
         },
         {
             "fieldId": "40",
-            "title": "PRICE (INR)",
+            "title": "PRICE (INR)", // key name need same
             "type": "number",
             "section": 2,
             "valueType": "float",
@@ -613,7 +613,7 @@
         },
         {
             "fieldId": "41",
-            "title": "GST TAX",
+            "title": "GST TAX",  // key name need same
             "type": "number",
             "section": 2,
             "valueType": "float",
@@ -625,7 +625,7 @@
         },
 
         {
-            "fieldId": "42",
+            "fieldId": "42",// key name need same
             "title": "Additional accessories",
             "type": "dropdown",
             "valueType": "string",

@@ -237,7 +237,7 @@ exports.generateQuotationPDF = async (req, res) => {
           select: "title type", // Only select necessary fields
         },
       })
-      .populate("customer", "companyName phone") // Only select necessary fields
+      .populate("customer", "companyName phone fullName") // Only select necessary fields
       .populate("submittedBy", "username phone")
       .lean(); // Use lean() for better performance with large objects
 
@@ -358,6 +358,151 @@ ${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
     res.setHeader(
       "Content-Disposition",
       `attachment; filename=quotation-${form.formNumber}.pdf`
+    );
+
+    // Send the PDF
+    res.send(pdf);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    res.status(500).json({
+      status: false,
+      message: "Error generating PDF",
+      error: error.message,
+    });
+  }
+};
+
+exports.viewQuotationForm = async (req, res) => {
+  try {
+    const { formId } = req.params;
+
+    // Find the machine form with optimized query - only select needed fields
+    const form = await MachineForm.findById(formId)
+      .populate({
+        path: "machines.machine",
+        model: "Machine",
+        select: "name fields", // Only select necessary fields
+        populate: {
+          path: "fields",
+          select: "title type", // Only select necessary fields
+        },
+      })
+      .populate("customer", "companyName phone, fullName") // Only select necessary fields
+      .populate("submittedBy", "username phone")
+      .lean(); // Use lean() for better performance with large objects
+
+    if (!form) {
+      return res.status(404).json({
+        status: false,
+        message: "Form not found",
+      });
+    }
+
+    // Calculate totals
+    const totalPrice = form.machines.reduce(
+      (sum, machine) => sum + machine.totalPrice,
+      0
+    );
+    const totalGstAmount = form.machines.reduce(
+      (sum, machine) => sum + machine.gstAmount,
+      0
+    );
+    const totalDiscount = form.machines.reduce(
+      (sum, machine) => sum + (machine.discount || 0),
+      0
+    );
+    const finalTotal = form.machines.reduce(
+      (sum, machine) => sum + machine.finalTotal,
+      0
+    );
+
+    // Construct terms and conditions
+    const terms = `
+1. Payment Terms:
+   ${form.advance || ""}
+
+2. Cancellation Policy:
+   ${form.cancellation || ""}
+
+3. Delivery Terms:
+   ${form.delivery || ""}
+
+4. Insurance:
+   ${form.insurance || ""}
+
+5. Warranty:
+   ${form.warranty || ""}
+
+6. Validity:
+   ${form.validity || ""}
+
+${form.notes ? `\nAdditional Notes:\n${form.notes}` : ""}`;
+
+    // Optimized puppeteer launch options
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+
+    const page = await browser.newPage();
+
+    // Set resource load timeout for faster page loading
+    await page.setDefaultNavigationTimeout(0);
+    await page.setDefaultTimeout(0);
+
+    // Optimize page for performance
+    await page.setCacheEnabled(true);
+
+    // Faster content loading approach
+    const templatePath = path.join(__dirname, "../views/quotation.ejs");
+    const template = fs.readFileSync(templatePath, "utf-8");
+
+    // Prep data for template
+    const templateData = {
+      formNumber: form.formNumber,
+      customer: form.customer,
+      machines: form.machines,
+      submittedBy: form.submittedBy,
+      totalPrice,
+      totalGstAmount,
+      totalDiscount,
+      finalTotal,
+      terms,
+      advance: form.advance || "",
+      cancellation: form.cancellation || "",
+      delivery: form.delivery || "",
+      insurance: form.insurance || "",
+      warranty: form.warranty || "",
+      validity: form.validity || "",
+      notes: form.notes || "",
+    };
+    console.log(templateData);
+
+    // Render the template
+    const html = ejs.render(template, templateData);
+
+    // Set content with optimized options
+    await page.setContent(html, {
+      waitUntil: "networkidle0",
+      timeout: 30000,
+    });
+
+    // Generate PDF with optimized settings
+    const pdf = await page.pdf({
+      format: "A4",
+      printBackground: true,
+      preferCSSPageSize: true,
+      timeout: 30000,
+    });
+
+    // Close browser immediately after PDF generation
+    await browser.close();
+
+    // Set response headers
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `inline; filename=quotation-${form.formNumber}.pdf`
     );
 
     // Send the PDF

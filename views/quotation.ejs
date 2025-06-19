@@ -436,10 +436,11 @@
             <div style="margin-top:20px; margin-bottom:0;">
                 <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Date: <span style="font-weight:normal; color:#222;"> <%= (new Date()).toLocaleDateString('en-GB').split('/').join('-') %></span></p>
                 <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Quotation No.: <span style="font-weight:normal; color:#222;"> <%= formNumber %></span></p>
-                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Kind Attn.:</p>
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Agent Name: <span style="font-weight:normal; color:#222;"> <%= submittedBy && submittedBy.username ? submittedBy.username : '' %></span></p>
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Kind Attn.: <span style="font-weight:normal; color:#222;"> <%= customer && customer.fullName ? customer.fullName : '' %></span></p>
                 <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">Sub.: Technical and Financial Details for Extruder Blown Film Plant</p>
                 <p style="color:#011BB6; font-weight:bold; font-style:italic; margin-bottom:6px; font-size:16px; line-height:1.3;">Model: <%= machines[0].machine.name %></p>
-                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">To.</p>
+                <p style="color:#011BB6; font-weight:bold; margin-bottom:6px; font-size:16px; line-height:1.3;">To. <span style="font-weight:normal; color:#222;"> <%= customer && customer.companyName ? customer.companyName : '' %></span></p>
                 <p style="margin-top:8px; color:#222; margin-bottom:18px; font-size:15px; line-height:1.6;">Apropos to your requirement in personal discussion regarding Blown Film Extruder Machine, we thank you for giving us the opportunity to work with you for supplying you the machine as per your requirement.</p>
             </div>
             <div style="margin-top:10px; margin-bottom:18px;">
@@ -456,22 +457,22 @@
                 <tr style="background:#011BB6; color:#fff; font-weight:bold;">
                     <td style="border:1px solid #888; padding:8px; width:10%; text-align:center;">Sr. No.</td>
                     <td style="border:1px solid #888; padding:8px; width:60%; text-align:center;">Description</td>
-                    <td style="border:1px solid #888; padding:8px; width:30%; text-align:center;">Page No.</td>
+                    <!-- <td style="border:1px solid #888; padding:8px; width:30%; text-align:center;">Page No.</td> -->
                 </tr>
                 <tr>
                     <td style="border:1px solid #888; padding:8px; text-align:center;">1</td>
                     <td style="border:1px solid #888; padding:8px; font-weight:bold;">Section 1: Technical Specifications</td>
-                    <td style="border:1px solid #888; padding:8px;"></td>
+                    <!-- <td style="border:1px solid #888; padding:8px;"></td> -->
                 </tr>
                 <tr>
                     <td style="border:1px solid #888; padding:8px; text-align:center;">2</td>
                     <td style="border:1px solid #888; padding:8px; font-weight:bold;">Section 2: Financial Quote</td>
-                    <td style="border:1px solid #888; padding:8px;"></td>
+                    <!-- <td style="border:1px solid #888; padding:8px;"></td> -->
                 </tr>
                 <tr>
                     <td style="border:1px solid #888; padding:8px; text-align:center;">3.</td>
                     <td style="border:1px solid #888; padding:8px; font-weight:bold;">Section 3: Terms and Conditions</td>
-                    <td style="border:1px solid #888; padding:8px;"></td>
+                    <!-- <td style="border:1px solid #888; padding:8px;"></td> -->
                 </tr>
             </table>
             <div style="margin-top:32px;"></div>
@@ -537,42 +538,82 @@
         </div>
         <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
             <tr style="background:#011BB6; color:#fff; border:1px solid #011BB6;">
-                <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">SR. NO.</td>
+                <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">SR.</td>
                 <td style="width:50%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">DESCRIPTION</td>
                 <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">QTY</td>
                 <td style="width:16%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">RATE</td>
                 <td style="width:17%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">AMOUNT</td>
             </tr>
             <% 
-            // Prepare up to 4 items for the table
-            let items = [];
+            let finalTotal = 0;
             machines.forEach((machineItem, idx) => {
-                items.push({
-                    sr: idx+1,
-                    desc: machineItem.machine.name,
-                    qty: 1,
-                    rate: machineItem.totalPrice ? machineItem.totalPrice.toLocaleString() : '',
-                    amount: machineItem.finalTotal ? machineItem.finalTotal.toLocaleString() : ''
-                });
-            });
-            while(items.length < 4) items.push({sr: items.length+1, desc: '', qty: '', rate: '', amount: ''});
-            let totalQty = items.reduce((sum, i) => sum + (parseInt(i.qty) || 0), 0);
-            let totalAmount = items.reduce((sum, i) => sum + (parseInt(i.amount.replace(/,/g, '')) || 0), 0);
+                let baseAmount = machineItem.totalPrice || 0;
+                let discount = machineItem.discount || 0;
+                let addons = machineItem.addons || 0;
+                let gstPercent = 0;
+                if (machineItem.machine && machineItem.machine.fields) {
+                    let gstField = machineItem.machine.fields.find(f => f.title && f.title.toUpperCase().includes('GST TAX'));
+                    if (gstField && gstField.value && gstField.value.first) {
+                        gstPercent = parseFloat(gstField.value.first);
+                    }
+                }
+                let subtotal = baseAmount + addons - discount;
+                let gstAmount = gstPercent ? (subtotal * gstPercent / 100) : 0;
+                let machineTotal = subtotal + gstAmount;
+                finalTotal += machineTotal;
             %>
-            <% items.forEach((item, idx) => { %>
             <tr style="border:1px solid #011BB6; color:#011BB6;">
-                <td style="text-align:center; font-weight:bold; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.sr %></td>
-                <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.desc %></td>
-                <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.qty %></td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.rate %></td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= item.amount %></td>
+                <td style="text-align:center; font-weight:bold; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= idx+1 %></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= machineItem.machine.name %></td>
+                <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">1</td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= baseAmount.toLocaleString() %></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= baseAmount.toLocaleString() %></td>
+            </tr>
+            <% if(addons) { %>
+            <tr style="border:1px solid #011BB6; color:#011BB6;">
+                <td></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px;">Addons</td>
+                <td></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;"><%= addons.toLocaleString() %></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;"><%= addons.toLocaleString() %></td>
+            </tr>
+            <% } %>
+            <% if(discount) { %>
+            <tr style="border:1px solid #011BB6; color:#011BB6;">
+                <td></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px;">Discount</td>
+                <td></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;">-<%= discount.toLocaleString() %></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;">-<%= discount.toLocaleString() %></td>
+            </tr>
+            <% } %>
+            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
+                <td></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px; font-weight:bold;">Subtotal</td>
+                <td></td>
+                <td></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-weight:bold;"><%= subtotal.toLocaleString() %></td>
+            </tr>
+            <% if(gstPercent) { %>
+            <tr style="border:1px solid #011BB6; color:#011BB6;">
+                <td></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px;">GST (<%= gstPercent %> %)</td>
+                <td></td>
+                <td></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;"><%= gstAmount.toLocaleString() %></td>
+            </tr>
+            <% } %>
+            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
+                <td></td>
+                <td style="border:1px solid #011BB6; padding:8px 4px; font-weight:bold;">Total</td>
+                <td></td>
+                <td></td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-weight:bold;"><%= machineTotal.toLocaleString() %></td>
             </tr>
             <% }); %>
-            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
-                <td colspan="2" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">TOTAL</td>
-                <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= totalQty %></td>
-                <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;"></td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= totalAmount ? totalAmount.toLocaleString() : '' %></td>
+            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold; background:#e6e6ff;">
+                <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:17px; font-weight:bold;">Final total</td>
+                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:17px; font-weight:bold;"><%= finalTotal.toLocaleString() %></td>
             </tr>
         </table>
     </div>
