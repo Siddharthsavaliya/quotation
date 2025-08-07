@@ -12,6 +12,27 @@ const addonSchema = new mongoose.Schema({
   },
 });
 
+// Schema for other charges
+const otherChargeSchema = new mongoose.Schema({
+  description: {
+    type: String,
+    required: true,
+  },
+  qty: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  rate: {
+    type: Number,
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+});
+
 // Schema for field values
 const fieldValueSchema = new mongoose.Schema({
   fieldId: {
@@ -94,6 +115,20 @@ const machineFormSchema = new mongoose.Schema(
       required: true,
     },
     machines: [machineItemSchema],
+    // Other charges
+    otherCharges: [otherChargeSchema],
+    otherChargesSubtotal: {
+      type: Number,
+      default: 0,
+    },
+    otherChargesGST: {
+      type: Number,
+      default: 0,
+    },
+    otherChargesGrandTotal: {
+      type: Number,
+      default: 0,
+    },
     // Overall pricing details
     totalPrice: {
       type: Number,

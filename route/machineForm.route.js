@@ -17,6 +17,9 @@ router.get("/:id", machineFormController.getFormById);
 // Update form
 router.put("/:id", machineFormController.updateForm);
 
+// Update other charges
+router.put("/:id/other-charges", machineFormController.updateOtherCharges);
+
 // Submit form
 router.post("/:id/submit", machineFormController.submitForm);
 

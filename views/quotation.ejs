@@ -599,7 +599,7 @@ function formatINR(x) {
                 const sectionData = sectionIndexGroups[sectionIndex];
             %>
             <!-- Section Index Header -->
-            <div style="background:#e6f3ff; color:#000; padding:12px 15px; margin:20px 0 0 0; border-top:1px solid #000; border-left:1px solid #000; border-right:1px solid #000;">
+            <div style="background:#233fdd1d; color:#000; padding:12px 15px; margin:20px 0 0 0; border-top:1px solid #ddd; border-left:1px solid #ddd; border-right:1px solid #ddd;">
                 <div style="font-size:18px; font-weight:bold; text-transform:uppercase;">
                     <%= sectionData.title %>
                 </div>
@@ -624,21 +624,22 @@ function formatINR(x) {
             %>
             <table style="width:100%; border-collapse:collapse; margin-bottom:0px;">
                 <thead>
-                    <tr style="background:#fff; color:#011BB6; border:1px solid #011BB6;">
-                        <td style="width:10%; font-weight:bold; font-size:18px; text-align:center; padding:10px 6px; border:1px solid #011BB6;"> <%= mainSection %> </td>
-                        <td style="width:35%; font-weight:bold; font-size:17px; padding:10px 6px; text-transform:uppercase; border:1px solid #011BB6;"> <%= mainField ? mainField.title : '' %> </td>
-                        <td style="font-weight:bold; font-size:15px; padding:10px 6px; border:1px solid #011BB6;"> <%= mainFieldValue %> </td>
+                    <tr style="background:#fff; color:#011BB6; border:1px solid #ddd;">
+                        <td style="width:10%; font-weight:bold; font-size:15px; text-align:center; padding:8px 6px; border:1px solid #ddd;"> <%= mainSection %> </td>
+                        <td style="width:35%; font-weight:bold; font-size:14px; padding:8px 6px; text-transform:uppercase; border:1px solid #ddd;"> <%= mainField ? mainField.title : '' %> </td>
+                        <td style="font-weight:bold; font-size:13px; padding:8px 6px; border:1px solid #ddd;"> <%= mainFieldValue %> </td>
                     </tr>
                 </thead>
                 <tbody>
-                <% subFields.forEach(subField => {
+                <% subFields.forEach((subField, index) => {
                     const fieldValue = machineItem.fieldValues.find(fv => fv.fieldId.toString() === subField._id.toString());
                     if (fieldValue && fieldValue.value && fieldValue.value.toString().trim() !== '') {
+                        const rowBackground = index % 2 === 0 ? '#fff' : '#f8f9fa';
                 %>
-                <tr style="background:#fff; color:#011BB6; border:1px solid #011BB6;">
-                    <td style="text-align:center; font-weight:bold; padding:8px 6px; border:1px solid #011BB6;"> <%= subField.qFieldMain %> </td>
-                    <td style="font-weight:bold; padding:8px 6px; border:1px solid #011BB6;"> <%= subField.title %> </td>
-                    <td style="padding:8px 6px; border:1px solid #011BB6;"> <%= fieldValue.value %> </td>
+                <tr style="background:<%= rowBackground %>; color:#011BB6; border:1px solid #ddd;">
+                    <td style="text-align:center; font-weight:bold; padding:6px 6px; border:1px solid #ddd; font-size:13px;"> <%= subField.qFieldMain %> </td>
+                    <td style="font-weight:bold; padding:6px 6px; border:1px solid #ddd; font-size:13px;"> <%= subField.title %> </td>
+                    <td style="padding:6px 6px; border:1px solid #ddd; font-size:13px;"> <%= fieldValue.value %> </td>
                 </tr>
                 <% } }); %>
                 </tbody>
@@ -654,12 +655,12 @@ function formatINR(x) {
             Section 2: Financial Quote
         </div>
         <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
-            <tr style="background:#011BB6; color:#fff; border:1px solid #011BB6;">
-                <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">SR.</td>
-                <td style="width:50%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">DESCRIPTION</td>
-                <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">QTY</td>
-                <td style="width:16%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">RATE</td>
-                <td style="width:17%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">AMOUNT</td>
+            <tr style="background:#fff; color:#011BB6; border:1px solid #ddd;">
+                <td style="width:10%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">SR.</td>
+                <td style="width:50%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">DESCRIPTION</td>
+                <td style="width:10%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">QTY</td>
+                <td style="width:16%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">RATE</td>
+                <td style="width:17%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">AMOUNT</td>
             </tr>
             <% 
             let finalTotal = 0;
@@ -688,31 +689,31 @@ function formatINR(x) {
                 grandGST += gstAmount;
                 finalTotal += machineTotal;
             %>
-            <tr style="border:1px solid #011BB6; color:#011BB6;">
-                <td style="text-align:center; font-weight:bold; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= idx+1 %></td>
-                <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= machineItem.machine.name %></td>
-                <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">1</td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= baseAmount.toLocaleString() %></td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;"><%= baseAmount.toLocaleString() %></td>
+            <tr style="background:#fff; border:1px solid #ddd; color:#011BB6;">
+                <td style="text-align:center; font-weight:bold; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= idx+1 %></td>
+                <td style="border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= machineItem.machine.name %></td>
+                <td style="text-align:center; border:1px solid #ddd; padding:6px 4px; font-size:13px;">1</td>
+                <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= baseAmount.toLocaleString() %></td>
+                <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= baseAmount.toLocaleString() %></td>
             </tr>
             <% if (Array.isArray(machineItem.addons) && machineItem.addons.length > 0) { %>
             <% machineItem.addons.forEach(function(addon, addonIdx) { %>
-            <tr style="border:1px solid #011BB6; color:#011BB6;">
+            <tr style="background:#f8f9fa; border:1px solid #ddd; color:#011BB6;">
                 <td></td>
-                <td style="border:1px solid #011BB6; padding:8px 4px;"><%= addon.title %></td>
-                <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px;">1</td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;"><%= (Number(addon.amount) || 0).toLocaleString() %></td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;"><%= (Number(addon.amount) || 0).toLocaleString() %></td>
+                <td style="border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= addon.title %></td>
+                <td style="text-align:center; border:1px solid #ddd; padding:6px 4px; font-size:13px;">1</td>
+                <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= (Number(addon.amount) || 0).toLocaleString() %></td>
+                <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= (Number(addon.amount) || 0).toLocaleString() %></td>
             </tr>
             <% }) %>
             <% } %>
             <% if(discount) { %>
-            <tr style="border:1px solid #011BB6; color:#011BB6;">
+            <tr style="background:#fff; border:1px solid #ddd; color:#011BB6;">
                 <td></td>
-                <td style="border:1px solid #011BB6; padding:8px 4px;">Discount</td>
+                <td style="border:1px solid #ddd; padding:6px 4px; font-size:13px;">Discount</td>
                 <td></td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;">-<%= discount.toLocaleString() %></td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;">-<%= discount.toLocaleString() %></td>
+                <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;">-<%= discount.toLocaleString() %></td>
+                <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;">-<%= discount.toLocaleString() %></td>
             </tr>
             <% } %>
             <!-- <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
@@ -743,81 +744,105 @@ function formatINR(x) {
                 <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:17px; font-weight:bold;">Final total</td>
                 <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:17px; font-weight:bold;"><%= finalTotal.toLocaleString() %></td>
             </tr> -->
-            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold; background:#f3f3ff;">
-                <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;">Grand Subtotal</td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;"><%= formatINR(grandSubtotal) %></td>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+                <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">Grand Subtotal</td>
+                <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;"><%= formatINR(grandSubtotal) %></td>
             </tr>
             <!-- <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold; background:#f3f3ff;">
                 <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;">Grand GST</td>
                 <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;"><%= formatINR(grandGST) %></td>
             </tr> -->
-            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold; background:#f3f3ff;">
-                <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;">CGST (9%)</td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;"><%= formatINR(Math.round(grandGST/2)) %></td>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+                <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">CGST (9%)</td>
+                <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;"><%= formatINR(Math.round(grandGST/2)) %></td>
             </tr>
-            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold; background:#f3f3ff;">
-                <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;">SGST (9%)</td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;"><%= formatINR(Math.round(grandGST/2)) %></td>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+                <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">SGST (9%)</td>
+                <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;"><%= formatINR(Math.round(grandGST/2)) %></td>
             </tr>
-            <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold; background:#f3f3ff;">
-                <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;">Grand Total</td>
-                <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px; font-weight:bold;"><%= formatINR(finalTotal) %></td>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+                <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">Grand Total</td>
+                <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;"><%= formatINR(finalTotal) %></td>
             </tr>
         </table>
         <!-- Other Charges Table -->
         <div style="height: 24px;"></div>
         <div style="font-size:18px; color:#011BB6; font-weight:bold; margin-bottom:8px;">Other Charges</div>
         <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
-          <tr style="background:#011BB6; color:#fff; border:1px solid #011BB6;">
-            <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">SR.</td>
-            <td style="width:50%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">DESCRIPTION</td>
-            <td style="width:10%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">QTY</td>
-            <td style="width:16%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">RATE</td>
-            <td style="width:17%; font-weight:bold; font-size:16px; text-align:center; padding:8px 4px; border:1px solid #011BB6; text-transform:uppercase;">AMOUNT</td>
+          <tr style="background:#fff; color:#011BB6; border:1px solid #ddd;">
+            <td style="width:10%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">SR.</td>
+            <td style="width:50%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">DESCRIPTION</td>
+            <td style="width:10%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">QTY</td>
+            <td style="width:16%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">RATE</td>
+            <td style="width:17%; font-weight:bold; font-size:14px; text-align:center; padding:6px 4px; border:1px solid #ddd; text-transform:uppercase;">AMOUNT</td>
           </tr>
-          <tr style="border:1px solid #011BB6; color:#011BB6;">
-            <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">1</td>
-            <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;">Installation</td>
-            <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">1</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">5,000</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">5,000</td>
-          </tr>
-          <tr style="border:1px solid #011BB6; color:#011BB6;">
-            <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">2</td>
-            <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;">Transport</td>
-            <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">1</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">50,000</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">50,000</td>
-          </tr>
-          <tr style="border:1px solid #011BB6; color:#011BB6;">
-            <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">3</td>
-            <td style="border:1px solid #011BB6; padding:8px 4px; font-size:15px;">Packaging</td>
-            <td style="text-align:center; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">1</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">2,000</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:15px;">2,000</td>
-          </tr>
-          <% let otherSubtotal = 5000 + 50000 + 2000;
-             let otherGST = Math.round(otherSubtotal * 0.18);
-             let otherGrandTotal = otherSubtotal + otherGST; %>
-          <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
-            <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-weight:bold;">Subtotal</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-weight:bold;"><%= formatINR(otherSubtotal) %></td>
-          </tr>
-          <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
-            <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px;">CGST (9%)</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;"> <%= formatINR(Math.round(otherGST/2)) %> </td>
-          </tr>
-          <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
-            <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px;">SGST (9%)</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px;"> <%= formatINR(Math.round(otherGST/2)) %> </td>
-          </tr>
-          <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold;">
-            <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-weight:bold;">Grand Total</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-weight:bold;"><%= formatINR(otherGrandTotal) %></td>
-          </tr>
-          <tr style="border:1px solid #011BB6; color:#011BB6; font-weight:bold; background:#e6e6ff;">
-            <td colspan="4" style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:17px; font-weight:bold;">Grand Final Total</td>
-            <td style="text-align:right; border:1px solid #011BB6; padding:8px 4px; font-size:17px; font-weight:bold;"><%= formatINR(finalTotal + otherGrandTotal) %></td>
+          <% if (otherCharges && otherCharges.length > 0) { %>
+            <% otherCharges.forEach((charge, index) => { %>
+            <tr style="background:<%= index % 2 === 0 ? '#fff' : '#f8f9fa' %>; border:1px solid #ddd; color:#011BB6;">
+              <td style="text-align:center; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= index + 1 %></td>
+              <td style="border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= charge.description %></td>
+              <td style="text-align:center; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= charge.qty %></td>
+              <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= charge.rate.toLocaleString() %></td>
+              <td style="text-align:right; border:1px solid #ddd; padding:6px 4px; font-size:13px;"><%= charge.amount.toLocaleString() %></td>
+            </tr>
+            <% }); %>
+          <% } else { %>
+            <!-- Show NA when no other charges -->
+            <tr style="background:#fff; border:1px solid #ddd; color:#011BB6;">
+              <td colspan="5" style="text-align:center; border:1px solid #ddd; padding:12px 4px; font-size:13px; color:#666;">No Other Charges</td>
+            </tr>
+          <% } %>
+          
+          <% 
+          // Calculate other charges totals
+          let otherSubtotal = 0;
+          let otherGST = 0;
+          let otherGrandTotal = 0;
+          
+          if (otherCharges && otherCharges.length > 0) {
+            otherSubtotal = otherChargesSubtotal || otherCharges.reduce((sum, charge) => sum + charge.amount, 0);
+            otherGST = otherChargesGST || Math.round(otherSubtotal * 0.18);
+            otherGrandTotal = otherChargesGrandTotal || (otherSubtotal + otherGST);
+          }
+          %>
+          <% if (otherCharges && otherCharges.length > 0) { %>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">Subtotal</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;"><%= formatINR(otherSubtotal) %></td>
+            </tr>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">CGST (9%)</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;"> <%= formatINR(Math.round(otherGST/2)) %> </td>
+            </tr>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">SGST (9%)</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;"> <%= formatINR(Math.round(otherGST/2)) %> </td>
+            </tr>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">Grand Total</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;"><%= formatINR(otherGrandTotal) %></td>
+            </tr>
+          <% } else { %>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">Subtotal</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">NA</td>
+            </tr>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">CGST (9%)</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">NA</td>
+            </tr>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">SGST (9%)</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px;">NA</td>
+            </tr>
+            <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#f3f3ff;">
+              <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">Grand Total</td>
+              <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">NA</td>
+            </tr>
+          <% } %>
+          <tr style="border:1px solid #ddd; color:#011BB6; font-weight:bold; background:#e6e6ff;">
+            <td colspan="4" style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;">Grand Final Total</td>
+            <td style="text-align:right; border:1px solid #ddd; padding:4px 4px; font-size:13px; font-weight:bold;"><%= formatINR(finalTotal + (otherGrandTotal || 0)) %></td>
           </tr>
         </table>
     </div>

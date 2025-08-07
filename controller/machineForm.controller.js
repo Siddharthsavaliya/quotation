@@ -8,6 +8,7 @@ exports.createForm = async (req, res) => {
     const {
       customer,
       machines,
+      otherCharges,
       notes,
       // Business Details
       advance,
@@ -50,7 +51,7 @@ exports.createForm = async (req, res) => {
       }
     }
 
-    // Calculate overall totals
+    // Calculate overall totals (excluding other charges)
     const totalPrice = machines.reduce((sum, item) => sum + item.totalPrice, 0);
     const totalGstAmount = machines.reduce(
       (sum, item) => sum + item.gstAmount,
@@ -62,10 +63,25 @@ exports.createForm = async (req, res) => {
     );
     const finalTotal = machines.reduce((sum, item) => sum + item.finalTotal, 0);
 
+    // Calculate other charges totals (separate from main total)
+    let otherChargesSubtotal = 0;
+    let otherChargesGST = 0;
+    let otherChargesGrandTotal = 0;
+
+    if (otherCharges && otherCharges.length > 0) {
+      otherChargesSubtotal = otherCharges.reduce((sum, charge) => sum + charge.amount, 0);
+      otherChargesGST = Math.round(otherChargesSubtotal * 0.18); // 18% GST
+      otherChargesGrandTotal = otherChargesSubtotal + otherChargesGST;
+    }
+
     const form = new MachineForm({
       customer,
       submittedBy: req.user._id,
       machines,
+      otherCharges,
+      otherChargesSubtotal,
+      otherChargesGST,
+      otherChargesGrandTotal,
       notes,
       // Overall pricing details
       totalPrice,
@@ -134,6 +150,7 @@ exports.updateForm = async (req, res) => {
     const {
       customer,
       machines,
+      otherCharges,
       notes,
       // Business Details
       advance,
@@ -182,7 +199,7 @@ exports.updateForm = async (req, res) => {
       }
     }
 
-    // Calculate overall totals
+    // Calculate overall totals (excluding other charges)
     const totalPrice = machines.reduce((sum, item) => sum + item.totalPrice, 0);
     const totalGstAmount = machines.reduce(
       (sum, item) => sum + item.gstAmount,
@@ -194,9 +211,24 @@ exports.updateForm = async (req, res) => {
     );
     const finalTotal = machines.reduce((sum, item) => sum + item.finalTotal, 0);
 
+    // Calculate other charges totals (separate from main total)
+    let otherChargesSubtotal = 0;
+    let otherChargesGST = 0;
+    let otherChargesGrandTotal = 0;
+
+    if (otherCharges && otherCharges.length > 0) {
+      otherChargesSubtotal = otherCharges.reduce((sum, charge) => sum + charge.amount, 0);
+      otherChargesGST = Math.round(otherChargesSubtotal * 0.18); // 18% GST
+      otherChargesGrandTotal = otherChargesSubtotal + otherChargesGST;
+    }
+
     // Update form fields
     form.customer = customer;
     form.machines = machines;
+    form.otherCharges = otherCharges || [];
+    form.otherChargesSubtotal = otherChargesSubtotal;
+    form.otherChargesGST = otherChargesGST;
+    form.otherChargesGrandTotal = otherChargesGrandTotal;
     form.notes = notes;
     form.totalPrice = totalPrice;
     form.totalGstAmount = totalGstAmount;
@@ -262,6 +294,47 @@ exports.updateFormStatus = async (req, res) => {
     await form.save();
 
     res.status(200).json(response(true, `Form ${status} successfully`, form));
+  } catch (error) {
+    res.status(500).json(response(false, error.message));
+  }
+};
+
+// Update other charges
+exports.updateOtherCharges = async (req, res) => {
+  try {
+    const { otherCharges } = req.body;
+    const form = await MachineForm.findById(req.params.id);
+
+    if (!form) {
+      return res.status(404).json(response(false, "Form not found"));
+    }
+
+    // Only allow updates if form is in draft status
+    if (form.status !== "draft") {
+      return res
+        .status(400)
+        .json(response(false, "Cannot update submitted form"));
+    }
+
+    // Calculate other charges totals
+    let otherChargesSubtotal = 0;
+    let otherChargesGST = 0;
+    let otherChargesGrandTotal = 0;
+
+    if (otherCharges && otherCharges.length > 0) {
+      otherChargesSubtotal = otherCharges.reduce((sum, charge) => sum + charge.amount, 0);
+      otherChargesGST = Math.round(otherChargesSubtotal * 0.18); // 18% GST
+      otherChargesGrandTotal = otherChargesSubtotal + otherChargesGST;
+    }
+
+    // Update form fields
+    form.otherCharges = otherCharges || [];
+    form.otherChargesSubtotal = otherChargesSubtotal;
+    form.otherChargesGST = otherChargesGST;
+    form.otherChargesGrandTotal = otherChargesGrandTotal;
+
+    await form.save();
+    res.status(200).json(response(true, "Other charges updated successfully", form));
   } catch (error) {
     res.status(500).json(response(false, error.message));
   }
