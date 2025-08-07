@@ -52,7 +52,7 @@ const dynamicFieldSchema = new mongoose.Schema({
     of: [fieldOptionSchema],
     default: undefined
   }],
-  value: { 
+  value: {
     type: Map,
     of: mongoose.Schema.Types.Mixed,
     default: new Map()
@@ -63,6 +63,8 @@ const dynamicFieldSchema = new mongoose.Schema({
   order: { type: Number, default: 0 },
   subOrder: { type: Number, default: 0 },
   qFieldMain: { type: Number, default: 1 },
+  sectionIndex: { type: Number, default: 1 },
+  sectionTitle: { type: String },
 });
 
 // Schema for custom fields

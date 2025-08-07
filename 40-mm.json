@@ -8,12 +8,14 @@
             "type": "text",
             "section": 1,
             "valueType": "string",
-            "value":{
+            "value": {
                 "first": "Gas nitriding"
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 1
+            "qFieldMain": 1,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "2",
@@ -21,17 +23,29 @@
             "type": "dropdown",
             "valueType": "string",
             "section": 1,
-            "value":{
+            "value": {
                 "first": "26:1"
             },
             "options": [
-                { "first": [
-                    { "label": "26:1", "value": "26:1", "amount": 0 },
-                    { "label": "32:1", "value": "32:1", "amount": 75000 }
-                ] }
+                {
+                    "first": [
+                        {
+                            "label": "26:1",
+                            "value": "26:1",
+                            "amount": 0
+                        },
+                        {
+                            "label": "32:1",
+                            "value": "32:1",
+                            "amount": 75000
+                        }
+                    ]
+                }
             ],
             "isRequired": true,
-            "qFieldMain": 1.1
+            "qFieldMain": 1.1,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "3",
@@ -39,7 +53,7 @@
             "type": "text",
             "section": 1,
             "valueType": "string",
-            "value":{
+            "value": {
                 "26:1": "2",
                 "32:1": "3"
             },
@@ -47,7 +61,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 1.2
+            "qFieldMain": 1.2,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "4",
@@ -55,7 +71,7 @@
             "type": "text",
             "section": 1,
             "valueType": "string",
-            "value":{
+            "value": {
                 "26:1": "5.7",
                 "32:1": "8.3"
             },
@@ -63,7 +79,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 1.3
+            "qFieldMain": 1.3,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "5",
@@ -71,7 +89,7 @@
             "type": "text",
             "section": 1,
             "valueType": "string",
-            "value":{
+            "value": {
                 "26:1": "2nd zone",
                 "32:1": "2nd Zone & 3rd Zone"
             },
@@ -79,7 +97,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 1.4
+            "qFieldMain": 1.4,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "6",
@@ -87,7 +107,7 @@
             "type": "text",
             "section": 1,
             "valueType": "string",
-            "value":{
+            "value": {
                 "26:1": "0.5 hp & Single phase 220 volt",
                 "32:1": "2N0. 0.5 hp & Single phase 220 volt"
             },
@@ -95,7 +115,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 1.5
+            "qFieldMain": 1.5,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "7",
@@ -103,12 +125,14 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "first": 40
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 1.6
+            "qFieldMain": 1.6,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "8",
@@ -116,12 +140,14 @@
             "type": "text",
             "section": 1,
             "valueType": "string",
-            "value":{
+            "value": {
                 "first": ""
             },
             "isRequired": false,
             "isEditable": true,
-            "qFieldMain": 1.7
+            "qFieldMain": 1.7,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "9",
@@ -129,17 +155,29 @@
             "type": "dropdown",
             "valueType": "string",
             "section": 1,
-            "value":{
+            "value": {
                 "first": "Standard"
             },
             "options": [
-                { "first": [
-                    { "label": "Standard", "value": "Standard", "amount": 0 },
-                    { "label": "Barrier", "value": "Barrier", "amount": 0 }
-                ] }
+                {
+                    "first": [
+                        {
+                            "label": "Standard",
+                            "value": "Standard",
+                            "amount": 0
+                        },
+                        {
+                            "label": "Barrier",
+                            "value": "Barrier",
+                            "amount": 0
+                        }
+                    ]
+                }
             ],
             "isRequired": true,
-            "qFieldMain": 1.8
+            "qFieldMain": 1.8,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "10",
@@ -147,12 +185,14 @@
             "type": "text",
             "section": 1,
             "valueType": "string",
-            "value":{
+            "value": {
                 "first": "Gas nitriding"
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 1.9
+            "qFieldMain": 1.9,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "11",
@@ -162,27 +202,65 @@
             "section": 1,
             "options": [
                 {
-                     "Standard": [
-                    { "label": "35kg/hr for BIO", "value": "35kg/hr for BIO", "amount": 0 },
-                    { "label": "37kg/hr for HDPE", "value": "37kg/hr for HDPE", "amount": 0 },
-                    { "label": "30kg/hr for LLDPE", "value": "30kg/hr for LLDPE", "amount": 0 }
-                ] 
-            },
-            {
-                "Barrier": [
-                    { "label": "40kg/hr for BIO", "value": "40kg/hr for BIO", "amount": 0 },
-                    { "label": "40kg/hr for HDPE", "value": "40kg/hr for HDPE", "amount": 0 },
-                    { "label": "35kg/hr for LLDPE", "value": "35kg/hr for LLDPE", "amount": 0 },
-                    { "label": "42kg/hr for BIO", "value": "42kg/hr for BIO", "amount": 0 },
-                    { "label": "42kg/hr for HDPE", "value": "42kg/hr for HDPE", "amount": 0 },
-                    { "label": "37kg/hr for LLDPE", "value": "37kg/hr for LLDPE", "amount": 0 }
-                ]
-            }
+                    "Standard": [
+                        {
+                            "label": "35kg/hr for BIO",
+                            "value": "35kg/hr for BIO",
+                            "amount": 0
+                        },
+                        {
+                            "label": "37kg/hr for HDPE",
+                            "value": "37kg/hr for HDPE",
+                            "amount": 0
+                        },
+                        {
+                            "label": "30kg/hr for LLDPE",
+                            "value": "30kg/hr for LLDPE",
+                            "amount": 0
+                        }
+                    ]
+                },
+                {
+                    "Barrier": [
+                        {
+                            "label": "40kg/hr for BIO",
+                            "value": "40kg/hr for BIO",
+                            "amount": 0
+                        },
+                        {
+                            "label": "40kg/hr for HDPE",
+                            "value": "40kg/hr for HDPE",
+                            "amount": 0
+                        },
+                        {
+                            "label": "35kg/hr for LLDPE",
+                            "value": "35kg/hr for LLDPE",
+                            "amount": 0
+                        },
+                        {
+                            "label": "42kg/hr for BIO",
+                            "value": "42kg/hr for BIO",
+                            "amount": 0
+                        },
+                        {
+                            "label": "42kg/hr for HDPE",
+                            "value": "42kg/hr for HDPE",
+                            "amount": 0
+                        },
+                        {
+                            "label": "37kg/hr for LLDPE",
+                            "value": "37kg/hr for LLDPE",
+                            "amount": 0
+                        }
+                    ]
+                }
             ],
             "refreshDynamicField": "9",
             "isDynamic": true,
             "isRequired": true,
-            "qFieldMain": 2
+            "qFieldMain": 2,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "12",
@@ -190,12 +268,14 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "first": 10
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 2.1
+            "qFieldMain": 2.1,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "13",
@@ -203,17 +283,29 @@
             "type": "dropdown",
             "valueType": "string",
             "section": 1,
-            "value":{
+            "value": {
                 "first": "ABB/ Siemens"
             },
             "options": [
-                { "first": [
-                    { "label": "ABB/ Siemens", "value": "ABB/ Siemens", "amount": 0 },
-                    { "label": "LHP", "value": "LHP", "amount": -10000 }
-                ] }
+                {
+                    "first": [
+                        {
+                            "label": "ABB/ Siemens",
+                            "value": "ABB/ Siemens",
+                            "amount": 0
+                        },
+                        {
+                            "label": "LHP",
+                            "value": "LHP",
+                            "amount": -10000
+                        }
+                    ]
+                }
             ],
             "isRequired": true,
-            "qFieldMain": 2.2
+            "qFieldMain": 2.2,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "14",
@@ -223,22 +315,40 @@
             "section": 1,
             "options": [
                 {
-                     "ABB/ Siemens": [
-                    { "label": "HDPE 65mm ( 1.25mm lip Gap )", "value": "HDPE 65mm ( 1.25mm lip Gap )", "amount": 0 },
-                    { "label": "LLDPE 125mm ( 2.2mm Lip Gap )", "value": "LLDPE 125mm ( 2.2mm Lip Gap )", "amount": 0 }
-                ] 
-            },
-            {
-                "LHP": [
-                    { "label": "HDPE 75mm ( 1.25mm lip Gap )", "value": "HDPE 75mm ( 1.25mm lip Gap )", "amount": 0 },
-                    { "label": "LLDPE 100mm ( 2.2mm Lip Gap )", "value": "LLDPE 100mm ( 2.2mm Lip Gap )", "amount": 0 }
-                ]
-            }
+                    "ABB/ Siemens": [
+                        {
+                            "label": "HDPE 65mm ( 1.25mm lip Gap )",
+                            "value": "HDPE 65mm ( 1.25mm lip Gap )",
+                            "amount": 0
+                        },
+                        {
+                            "label": "LLDPE 125mm ( 2.2mm Lip Gap )",
+                            "value": "LLDPE 125mm ( 2.2mm Lip Gap )",
+                            "amount": 0
+                        }
+                    ]
+                },
+                {
+                    "LHP": [
+                        {
+                            "label": "HDPE 75mm ( 1.25mm lip Gap )",
+                            "value": "HDPE 75mm ( 1.25mm lip Gap )",
+                            "amount": 0
+                        },
+                        {
+                            "label": "LLDPE 100mm ( 2.2mm Lip Gap )",
+                            "value": "LLDPE 100mm ( 2.2mm Lip Gap )",
+                            "amount": 0
+                        }
+                    ]
+                }
             ],
             "refreshDynamicField": "13",
             "isDynamic": true,
             "isRequired": true,
-            "qFieldMain": 2.3
+            "qFieldMain": 2.3,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "15",
@@ -246,12 +356,14 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "first": 2
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 2.4
+            "qFieldMain": 2.4,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "16",
@@ -259,12 +371,14 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "first": 4
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 2.5
+            "qFieldMain": 2.5,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "17",
@@ -272,12 +386,14 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "first": 1
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 2.6
+            "qFieldMain": 2.6,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "18",
@@ -285,12 +401,14 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "first": 2.5
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 2.7
+            "qFieldMain": 2.7,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "19",
@@ -298,7 +416,7 @@
             "type": "text",
             "valueType": "string",
             "section": 1,
-            "value":{
+            "value": {
                 "ABB/ Siemens": "Single leaf",
                 "LHP": "Dual leaf"
             },
@@ -306,7 +424,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 2.8
+            "qFieldMain": 2.8,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "20",
@@ -314,12 +434,14 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "first": 2.2
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 2.9
+            "qFieldMain": 2.9,
+            "sectionTitle": "EXTRUDER ( HOT PARTS DETAILS )",
+            "sectionIndex": 1
         },
         {
             "fieldId": "21",
@@ -327,7 +449,7 @@
             "type": "text",
             "valueType": "string",
             "section": 1,
-            "value":{
+            "value": {
                 "ABB/ Siemens": "ABB/Siemens",
                 "LHP": "LHP"
             },
@@ -335,7 +457,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3
+            "qFieldMain": 3,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "22",
@@ -343,17 +467,29 @@
             "type": "dropdown",
             "valueType": "string",
             "section": 1,
-            "value":{
+            "value": {
                 "first": "ABB/ Delta"
             },
             "options": [
-                { "first": [
-                    { "label": "ABB/ Delta", "value": "ABB/ Delta", "amount": 0 },
-                    { "label": "Crompton", "value": "Crompton", "amount": 0 }
-                ] }
+                {
+                    "first": [
+                        {
+                            "label": "ABB/ Delta",
+                            "value": "ABB/ Delta",
+                            "amount": 0
+                        },
+                        {
+                            "label": "Crompton",
+                            "value": "Crompton",
+                            "amount": 0
+                        }
+                    ]
+                }
             ],
             "isRequired": true,
-            "qFieldMain": 3.1
+            "qFieldMain": 3.1,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "23",
@@ -361,7 +497,7 @@
             "type": "number",
             "section": 1,
             "valueType": "float",
-            "value":{
+            "value": {
                 "ABB/ Delta": 12,
                 "Crompton": 13
             },
@@ -369,7 +505,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3.2
+            "qFieldMain": 3.2,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "24",
@@ -382,7 +520,9 @@
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3.3
+            "qFieldMain": 3.3,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "25",
@@ -395,7 +535,9 @@
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3.4
+            "qFieldMain": 3.4,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "26",
@@ -408,7 +550,9 @@
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3.5
+            "qFieldMain": 3.5,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "27",
@@ -421,7 +565,9 @@
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3.6
+            "qFieldMain": 3.6,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "28",
@@ -434,7 +580,9 @@
             },
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3.7
+            "qFieldMain": 3.7,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "29",
@@ -442,17 +590,29 @@
             "type": "dropdown",
             "valueType": "string",
             "section": 1,
-            "value":{
+            "value": {
                 "first": "ABB/ Delta"
             },
             "options": [
-                { "first": [
-                    { "label": "ABB/ Delta", "value": "ABB/ Delta", "amount": 0 },
-                    { "label": "Crompton", "value": "Crompton", "amount": 0 }
-                ] }
+                {
+                    "first": [
+                        {
+                            "label": "ABB/ Delta",
+                            "value": "ABB/ Delta",
+                            "amount": 0
+                        },
+                        {
+                            "label": "Crompton",
+                            "value": "Crompton",
+                            "amount": 0
+                        }
+                    ]
+                }
             ],
             "isRequired": true,
-            "qFieldMain": 3.8
+            "qFieldMain": 3.8,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "30",
@@ -468,7 +628,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 3.9
+            "qFieldMain": 3.9,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "31",
@@ -484,7 +646,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 4
+            "qFieldMain": 4,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "32",
@@ -500,7 +664,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 4.1
+            "qFieldMain": 4.1,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "33",
@@ -516,7 +682,9 @@
             "isDynamic": true,
             "isRequired": true,
             "isEditable": false,
-            "qFieldMain": 4.2
+            "qFieldMain": 4.2,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "34",
@@ -532,7 +700,9 @@
             "isDynamic": true,
             "isRequired": false,
             "isEditable": true,
-            "qFieldMain": 4.3
+            "qFieldMain": 4.3,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "35",
@@ -545,7 +715,9 @@
             },
             "isRequired": false,
             "isEditable": true,
-            "qFieldMain": 4.4
+            "qFieldMain": 4.4,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "36",
@@ -558,7 +730,9 @@
             },
             "isRequired": false,
             "isEditable": true,
-            "qFieldMain": 4.5
+            "qFieldMain": 4.5,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "37",
@@ -571,7 +745,9 @@
             },
             "isRequired": false,
             "isEditable": true,
-            "qFieldMain": 4.6
+            "qFieldMain": 4.6,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "38",
@@ -584,7 +760,9 @@
             },
             "isRequired": false,
             "isEditable": true,
-            "qFieldMain": 4.7
+            "qFieldMain": 4.7,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "39",
@@ -597,11 +775,13 @@
             },
             "isRequired": false,
             "isEditable": true,
-            "qFieldMain": 4.8
+            "qFieldMain": 4.8,
+            "sectionTitle": "Screw",
+            "sectionIndex": 2
         },
         {
             "fieldId": "40",
-            "title": "PRICE (INR)", // key name need same
+            "title": "PRICE (INR)",
             "type": "number",
             "section": 2,
             "valueType": "float",
@@ -613,7 +793,7 @@
         },
         {
             "fieldId": "41",
-            "title": "GST TAX",  // key name need same
+            "title": "GST TAX",
             "type": "number",
             "section": 2,
             "valueType": "float",
@@ -623,35 +803,112 @@
             "isRequired": true,
             "isEditable": false
         },
-
         {
-            "fieldId": "42",// key name need same
+            "fieldId": "42",
             "title": "Additional accessories",
             "type": "dropdown",
             "valueType": "string",
             "section": 2,
             "options": [
-                { "first": [
-                    { "label": "Embossing unit", "value": "Embossing unit", "amount": 20000 },
-                    { "label": "Air ring cage type basket", "value": "Air ring cage type basket", "amount": 20000 },
-                    { "label": "Air sensor", "value": "Air sensor", "amount": 7500 },
-                    { "label": "Hopper Magnet", "value": "Hopper Magnet", "amount": 2000 },
-                    { "label": "Full Page Rotogravure Printing Machine", "value": "Full Page Rotogravure Printing Machine", "amount": 1165000 },
-                    { "label": "Full Page Rotogravure Printing Machine Kw", "value": "Full Page Rotogravure Printing Machine Kw", "amount": 0 },
-                    { "label": "Rotating Die", "value": "Rotating Die", "amount": 175000 },
-                    { "label": "Rotating Die Kw", "value": "Rotating Die Kw", "amount": 2 },
-                    { "label": "Rotating Die motor kw", "value": "Rotating Die motor kw", "amount": 0.37 },
-                    { "label": "Hopper Loader Dryer", "value": "Hopper Loader Dryer", "amount": 110000 },
-                    { "label": "Hopper Loader Dryer Kw", "value": "Hopper Loader Dryer Kw", "amount": 3 },
-                    { "label": "Punching Machine", "value": "Punching Machine", "amount": 95000 },
-                    { "label": "Punching Machine Kw", "value": "Punching Machine Kw", "amount": 1.5 },
-                    { "label": "Corona Treatment 26\"", "value": "Corona Treatment 26\"", "amount": 65000 },
-                    { "label": "Corona treater Kw", "value": "Corona treater Kw", "amount": 1.5 },
-                    { "label": "Mini Roto Printing Machine", "value": "Mini Roto Printing Machine", "amount": 30000 },
-                    { "label": "Mini Flexo Printing Machine", "value": "Mini Flexo Printing Machine", "amount": 30000 },
-                    { "label": "Extra Top Punch for cavity", "value": "Extra Top Punch for cavity", "amount": 25000 },
-                    { "label": "Extra insert plate for extra die top punch", "value": "Extra insert plate for extra die top punch", "amount": 5000 }
-                ] }
+                {
+                    "first": [
+                        {
+                            "label": "Embossing unit",
+                            "value": "Embossing unit",
+                            "amount": 20000
+                        },
+                        {
+                            "label": "Air ring cage type basket",
+                            "value": "Air ring cage type basket",
+                            "amount": 20000
+                        },
+                        {
+                            "label": "Air sensor",
+                            "value": "Air sensor",
+                            "amount": 7500
+                        },
+                        {
+                            "label": "Hopper Magnet",
+                            "value": "Hopper Magnet",
+                            "amount": 2000
+                        },
+                        {
+                            "label": "Full Page Rotogravure Printing Machine",
+                            "value": "Full Page Rotogravure Printing Machine",
+                            "amount": 1165000
+                        },
+                        {
+                            "label": "Full Page Rotogravure Printing Machine Kw",
+                            "value": "Full Page Rotogravure Printing Machine Kw",
+                            "amount": 0
+                        },
+                        {
+                            "label": "Rotating Die",
+                            "value": "Rotating Die",
+                            "amount": 175000
+                        },
+                        {
+                            "label": "Rotating Die Kw",
+                            "value": "Rotating Die Kw",
+                            "amount": 2
+                        },
+                        {
+                            "label": "Rotating Die motor kw",
+                            "value": "Rotating Die motor kw",
+                            "amount": 0.37
+                        },
+                        {
+                            "label": "Hopper Loader Dryer",
+                            "value": "Hopper Loader Dryer",
+                            "amount": 110000
+                        },
+                        {
+                            "label": "Hopper Loader Dryer Kw",
+                            "value": "Hopper Loader Dryer Kw",
+                            "amount": 3
+                        },
+                        {
+                            "label": "Punching Machine",
+                            "value": "Punching Machine",
+                            "amount": 95000
+                        },
+                        {
+                            "label": "Punching Machine Kw",
+                            "value": "Punching Machine Kw",
+                            "amount": 1.5
+                        },
+                        {
+                            "label": "Corona Treatment 26\"",
+                            "value": "Corona Treatment 26\"",
+                            "amount": 65000
+                        },
+                        {
+                            "label": "Corona treater Kw",
+                            "value": "Corona treater Kw",
+                            "amount": 1.5
+                        },
+                        {
+                            "label": "Mini Roto Printing Machine",
+                            "value": "Mini Roto Printing Machine",
+                            "amount": 30000
+                        },
+                        {
+                            "label": "Mini Flexo Printing Machine",
+                            "value": "Mini Flexo Printing Machine",
+                            "amount": 30000
+                        },
+                        {
+                            "label": "Extra Top Punch for cavity",
+                            "value": "Extra Top Punch for cavity",
+                            "amount": 25000
+                        },
+                        {
+                            "label": "Extra insert plate for extra die top punch",
+                            "value": "Extra insert plate for extra die top punch",
+                            "amount": 5000
+                        }
+                    ]
+                }
             ],
             "isRequired": false
         },

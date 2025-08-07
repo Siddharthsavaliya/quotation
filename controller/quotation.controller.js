@@ -387,8 +387,8 @@ exports.viewQuotationForm = async (req, res) => {
           select: "title type", // Only select necessary fields
         },
       })
-      .populate("customer", "companyName phone, fullName") // Only select necessary fields
-      .populate("submittedBy", "username phone")
+      .populate("customer") // Only select necessary fields
+      .populate("submittedBy", "username number email")
       .lean(); // Use lean() for better performance with large objects
 
     if (!form) {
