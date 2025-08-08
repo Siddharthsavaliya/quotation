@@ -32,4 +32,19 @@ router.put(
   machineController.updateCustomFieldValue
 );
 
+// Add key feature to machine
+router.post("/:id/key-features", machineController.addKeyFeature);
+
+// Update key feature
+router.put(
+  "/:machineId/key-features/:featureId",
+  machineController.updateKeyFeature
+);
+
+// Delete key feature
+router.delete(
+  "/:machineId/key-features/:featureId",
+  machineController.deleteKeyFeature
+);
+
 module.exports = router;

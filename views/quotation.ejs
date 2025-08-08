@@ -529,36 +529,21 @@ function formatINR(x) {
         </div>
     </div>
 
-    <!-- Insert full-page image as the second page -->
+    <!-- Key Features Pages for each machine -->
+    <% machines.forEach((machineItem, machineIndex) => { %>
     <div class="page image-page" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 297mm;">
         <div style="height: 50%; width: 100%; display: flex; align-items: center; justify-content: center;">
             <img src="https://res.cloudinary.com/di8zpqnk3/image/upload/v1752305038/aaaaaaaa_qj4eht.png" style="max-height: 90%; max-width: 90%; object-fit: fill; display: block; margin: 0; padding: 0; border: none;" />
         </div>
         <div style="height: 50%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 32px 48px 0 48px; box-sizing: border-box;">
-            <div style="font-size: 22px; color: #011BB6; font-weight: bold; margin-bottom: 18px; margin-top: 18px;">Key Features</div>
+            <div style="font-size: 22px; color: #011BB6; font-weight: bold; margin-bottom: 18px; margin-top: 18px;">Key Features - <%= machineItem.machine.name %></div>
             <ol style="font-size: 16px; color: #222; font-weight: 500; line-height: 1.7;">
                 <% let features = [];
-                   if (machines && machines.length > 0 && machines[0].machine && machines[0].machine.fields) {
-                     const mainFields = machines[0].machine.fields.filter(f => f.section === 1);
-                     const sectionGroups = {};
-                     mainFields.forEach(field => {
-                         const mainSection = Math.floor(field.qFieldMain);
-                         if (!sectionGroups[mainSection]) sectionGroups[mainSection] = [];
-                         sectionGroups[mainSection].push(field);
-                     });
-                     const sortedMainSections = Object.keys(sectionGroups).sort((a, b) => parseInt(a) - parseInt(b));
-                     features = sortedMainSections.slice(0, 5).map(mainSection => {
-                         const mainField = sectionGroups[mainSection].find(f => f.qFieldMain == mainSection);
-                         if (mainField) {
-                             const value = mainField.value && mainField.value.first ? mainField.value.first : '';
-                             return value ? `<strong>${mainField.title}</strong>: ${value}` : `<strong>${mainField.title}</strong>`;
-                         } else {
-                             return `Feature ${mainSection}`;
-                         }
-                     });
-                   }
-                   if (features.length < 5) {
-                     for (let i = features.length; i < 5; i++) features.push(`Feature ${i+1}`);
+                   if (machineItem.machine && machineItem.machine.keyFeatures && machineItem.machine.keyFeatures.length > 0) {
+                     // Use keyFeatures from current machine
+                     features = machineItem.machine.keyFeatures
+                       .sort((a, b) => (a.order || 0) - (b.order || 0))
+                       .map(feature => `<strong>${feature.title}</strong>: ${feature.value}`);
                    }
                    features.forEach((feature, idx) => { %>
                 <li><%- feature %></li>
@@ -566,6 +551,7 @@ function formatINR(x) {
             </ol>
         </div>
     </div>
+    <% }); %>
 
     <!-- Technical Proposal Pages -->
     <% machines.forEach((machineItem, machineIndex)=> { %>

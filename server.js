@@ -196,6 +196,7 @@ app.post("/create-machine", async (req, res) => {
       name: machineData.name,
       description: machineData.description || "",
       fields: machineData.fields || [],
+      keyFeatures: machineData.keyFeatures || [],
       createdBy: adminUser._id
     };
     await Machine.create(machineDoc);

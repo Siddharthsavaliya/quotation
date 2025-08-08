@@ -79,6 +79,13 @@ const customFieldSchema = new mongoose.Schema({
   order: { type: Number, default: 0 },
 });
 
+// Schema for key features
+const keyFeatureSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  value: { type: String, required: true },
+  order: { type: Number, default: 0 },
+});
+
 const machineSchema = new mongoose.Schema(
   {
     name: {
@@ -93,6 +100,7 @@ const machineSchema = new mongoose.Schema(
     },
     fields: [dynamicFieldSchema],
     customFields: [customFieldSchema],
+    keyFeatures: [keyFeatureSchema],
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

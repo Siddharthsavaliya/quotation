@@ -987,5 +987,92 @@
       },
       "isRequired": true
     }
+  ],
+  "keyFeatures": [
+    {
+      "title": "Application",
+      "value": "Shopping bag, Grocery bag, Liner bag & General purpose",
+      "order": 1
+    },
+    {
+      "title": "Die Lip Diameter for HDPE",
+      "value": "HDPE 45mm (1.2mm lip Gap) with machine fitting.",
+      "order": 2
+    },
+    {
+      "title": "Layflat width (min) (max)",
+      "value": "4 inch, 18 inch (100mm - 450mm)",
+      "order": 3
+    },
+    {
+      "title": "Nip roller width",
+      "value": "20 inch (500mm)",
+      "order": 4
+    },
+    {
+      "title": "Main motor / Make",
+      "value": "7.5 HP (5.5 Kw), ABB/Siemens",
+      "order": 5
+    },
+    {
+      "title": "Screw dia, L/D, type",
+      "value": "35mm, 26:1 L/D, Standard type",
+      "order": 6
+    },
+    {
+      "title": "Capacity / Production",
+      "value": "18 to 25 kg/hour",
+      "order": 7
+    },
+    {
+      "title": "Die Rotation option",
+      "value": "Fixed type Die – Standard type for single-layer films.",
+      "order": 8
+    },
+    {
+      "title": "Blower Motor HP",
+      "value": "3 HP (2.2 Kw)",
+      "order": 9
+    },
+    {
+      "title": "Take off motor HP",
+      "value": "0.75, ABB/Siemens",
+      "order": 10
+    },
+    {
+      "title": "Line speed MTR/MIN",
+      "value": "25-90 MTR/MIN (min & max)",
+      "order": 11
+    },
+    {
+      "title": "Film thickness",
+      "value": "20-100 microns (min & max)",
+      "order": 12
+    },
+    {
+      "title": "Surface winder",
+      "value": "0.5 HP torque motor with chain-sprocket drive.",
+      "order": 13
+    },
+    {
+      "title": "Dimensions",
+      "value": "L8 x W8 x H11.5 Foot",
+      "order": 14
+    },
+    {
+      "title": "MOTORS power load",
+      "value": "25 Kw",
+      "order": 15
+    },
+    {
+      "title": "HEATERS power load",
+      "value": "12 Kw",
+      "order": 16
+    },
+    {
+      "title": "Total power load",
+      "value": "21 Kw / 28 HP",
+      "order": 17
+    }
   ]
 }

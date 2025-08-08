@@ -231,14 +231,14 @@ exports.generateQuotationPDF = async (req, res) => {
       .populate({
         path: "machines.machine",
         model: "Machine",
-        select: "name fields", // Only select necessary fields
+        select: "name fields keyFeatures", // Include keyFeatures
         populate: {
           path: "fields",
           select: "title type", // Only select necessary fields
         },
       })
-      .populate("customer", "companyName phone fullName") // Only select necessary fields
-      .populate("submittedBy", "username phone")
+      .populate("customer") // Only select necessary fields
+      .populate("submittedBy")
       .lean(); // Use lean() for better performance with large objects
 
     if (!form) {
@@ -385,14 +385,14 @@ exports.viewQuotationForm = async (req, res) => {
       .populate({
         path: "machines.machine",
         model: "Machine",
-        select: "name fields", // Only select necessary fields
+        select: "name fields keyFeatures", // Include keyFeatures
         populate: {
           path: "fields",
           select: "title type", // Only select necessary fields
         },
       })
       .populate("customer") // Only select necessary fields
-      .populate("submittedBy", "username number email")
+      .populate("submittedBy")
       .lean(); // Use lean() for better performance with large objects
 
     if (!form) {

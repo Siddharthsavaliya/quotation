@@ -18,9 +18,18 @@ exports.createMachine = async (req, res) => {
       }
       return field;
     });
+
+    // Process keyFeatures if provided
+    const keyFeatures = req.body.keyFeatures?.map((feature, index) => ({
+      title: feature.title,
+      value: feature.value,
+      order: feature.order || index + 1
+    })) || [];
+
     const machine = new Machine({
       ...req.body,
       fields,
+      keyFeatures,
       createdBy: req.user._id,
     });
     await machine.save();
@@ -80,9 +89,22 @@ exports.updateMachine = async (req, res) => {
       }
       return field;
     });
+
+    // Process keyFeatures if provided
+    const keyFeatures = req.body.keyFeatures?.map((feature, index) => ({
+      title: feature.title,
+      value: feature.value,
+      order: feature.order || index + 1
+    })) || undefined;
+
+    const updateData = { ...req.body, fields };
+    if (keyFeatures !== undefined) {
+      updateData.keyFeatures = keyFeatures;
+    }
+
     const machine = await Machine.findByIdAndUpdate(
       req.params.id,
-      { ...req.body, fields },
+      updateData,
       {
         new: true,
         runValidators: true,
@@ -173,6 +195,84 @@ exports.getFieldTypes = async (req, res) => {
         valueTypes: VALUE_TYPES,
       })
     );
+  } catch (error) {
+    res.status(500).json(response(false, error.message));
+  }
+};
+
+// Add key feature to machine
+exports.addKeyFeature = async (req, res) => {
+  try {
+    const machine = await Machine.findById(req.params.id);
+
+    if (!machine) {
+      return res.status(404).json(response(false, "Machine not found"));
+    }
+
+    machine.keyFeatures.push(req.body);
+    await machine.save();
+
+    res
+      .status(200)
+      .json(response(true, "Key feature added successfully", machine));
+  } catch (error) {
+    res.status(500).json(response(false, error.message));
+  }
+};
+
+// Update key feature
+exports.updateKeyFeature = async (req, res) => {
+  try {
+    const { machineId, featureId } = req.params;
+    const { title, value, order } = req.body;
+
+    const machine = await Machine.findById(machineId);
+
+    if (!machine) {
+      return res.status(404).json(response(false, "Machine not found"));
+    }
+
+    const keyFeature = machine.keyFeatures.id(featureId);
+    if (!keyFeature) {
+      return res.status(404).json(response(false, "Key feature not found"));
+    }
+
+    if (title) keyFeature.title = title;
+    if (value) keyFeature.value = value;
+    if (order !== undefined) keyFeature.order = order;
+    
+    await machine.save();
+
+    res
+      .status(200)
+      .json(response(true, "Key feature updated successfully", machine));
+  } catch (error) {
+    res.status(500).json(response(false, error.message));
+  }
+};
+
+// Delete key feature
+exports.deleteKeyFeature = async (req, res) => {
+  try {
+    const { machineId, featureId } = req.params;
+
+    const machine = await Machine.findById(machineId);
+
+    if (!machine) {
+      return res.status(404).json(response(false, "Machine not found"));
+    }
+
+    const keyFeature = machine.keyFeatures.id(featureId);
+    if (!keyFeature) {
+      return res.status(404).json(response(false, "Key feature not found"));
+    }
+
+    machine.keyFeatures.pull(featureId);
+    await machine.save();
+
+    res
+      .status(200)
+      .json(response(true, "Key feature deleted successfully", machine));
   } catch (error) {
     res.status(500).json(response(false, error.message));
   }
